@@ -29,8 +29,26 @@ For Spring Session to work with Oracle Database, the following steps are necessa
 - Set these properties in `application.properties`
 
 ```
+    spring.datasource.jndi-name=<datasource jndi name>
     spring.session.store-type=jdbc
     spring.session.jdbc.initialize-schema=never
 ```
 
 - Manually create the tables in database (SQL file included in the repo).
+
+### JPA
+
+Enable Hibernate to initialize database tables by adding this to `application.properties`:
+
+```
+    spring.jpa.hibernate.ddl-auto=create-drop
+```
+
+Alternatively, Spring can also initialize the database.
+
+```
+    spring.sql.init.mode=always
+    spring.datasource.platform=oracle
+```
+
+Then define tables in `schema.sql` file and data in `data.sql` file.
