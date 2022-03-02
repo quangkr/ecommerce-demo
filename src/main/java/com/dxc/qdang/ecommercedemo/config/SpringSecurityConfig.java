@@ -1,4 +1,4 @@
-package com.dxc.qdang.ecommercedemo.auth;
+package com.dxc.qdang.ecommercedemo.config;
 
 import javax.sql.DataSource;
 
@@ -27,20 +27,20 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(final AuthenticationManagerBuilder auth)
             throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user1")
-                .password(passwordEncoder().encode("user1Pass"))
-                .roles("USER")
-                .and().withUser("user2")
-                .password(passwordEncoder().encode("user2Pass"))
-                .roles("USER")
-                .and().withUser("admin")
-                .password(passwordEncoder().encode("adminPass"))
-                .roles("ADMIN");
+//        auth.inMemoryAuthentication()
+//                .withUser("user1")
+//                .password(passwordEncoder().encode("user1Pass"))
+//                .roles("USER")
+//                .and().withUser("user2")
+//                .password(passwordEncoder().encode("user2Pass"))
+//                .roles("USER")
+//                .and().withUser("admin")
+//                .password(passwordEncoder().encode("adminPass"))
+//                .roles("ADMIN");
 
-//        auth.jdbcAuthentication()
-//                .dataSource(dataSource)
-//                .passwordEncoder(passwordEncoder());
+        auth.jdbcAuthentication()
+                .dataSource(dataSource)
+                .passwordEncoder(passwordEncoder());
     }
 
     @Override

@@ -5,14 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
 
   <h1>Login page</h1>
 
   <form action="login" method="POST">
-    <input type="text" name="username">
-    <input type="password" name="password">
+    <div>
+      <label>Username <input type="text" name="username"></label>
+    </div>
+    <div>
+      <label>Password <input type="password" name="password"></label>
+    </div>
     <button type="submit">Submit</button>
   </form>
 
