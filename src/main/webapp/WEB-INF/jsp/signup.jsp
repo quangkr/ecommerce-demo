@@ -28,6 +28,7 @@ form label {
       <form:input path="displayName" id="form-display-name"
         cssClass="form-control" type="text" />
       <form:label for="form-display-name" path="displayName">Display name</form:label>
+      <form:errors path="*" />
       <form:button type="submit">Submit</form:button>
     </div>
   </form:form>

@@ -1,8 +1,11 @@
 package com.dxc.qdang.ecommercedemo.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +28,14 @@ public class SignupController {
     }
 
     @PostMapping("/signup")
-    public String doSignup(@ModelAttribute("user") AppUserDto userDto) {
+    public String doSignup(
+            @ModelAttribute("user") @Valid AppUserDto userDto,
+            BindingResult bindingResult,
+            Model model) {
+        if (bindingResult.hasErrors()) {
+            return "signup";
+        }
+
         try {
             signupService
                     .registerNewUser(userDto);
