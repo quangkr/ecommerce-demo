@@ -20,14 +20,10 @@ public class AppUserDto {
     private String email;
 
     @NotBlank(message = "Password must not be blank")
-    @Size(
-            min = 8,
-            max = 50,
-            message = "Password must be between 8 and 50 characters")
     @Pattern(
             // https://stackoverflow.com/questions/22937618/reference-what-does-this-regex-mean/22944075
-            regexp = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=\\S+$).*$",
-            message = "Password must not contain space, and contain at least an alphabetic and a numeric character")
+            regexp = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=\\S+$).{8,50}$",
+            message = "Password must be between 8 and 50 characters, must not contain space, and must contain at least an alphabetic and a numeric character")
     private String password;
 
     @NotBlank(message = "Display name must not be blank")
