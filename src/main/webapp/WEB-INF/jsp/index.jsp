@@ -8,7 +8,8 @@
 </head>
 <body>
 
-  <h1>Home page! Welcome ${currentUser}</h1>
+  <h1>Welcome to Ecommerce Demo app.</h1>
+  <p>You're on ${activeProfile} profile</p>
 
 </body>
 </html>

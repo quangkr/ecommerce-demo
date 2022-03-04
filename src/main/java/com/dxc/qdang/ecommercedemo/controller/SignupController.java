@@ -33,7 +33,7 @@ public class SignupController {
             return "signup";
         }
 
-        return "index";
+        return "redirect:/";
     }
 
 }

@@ -1,19 +1,19 @@
 package com.dxc.qdang.ecommercedemo.controller;
 
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class HomeController {
+    
+    @Value("${spring.profiles.active}")
+    private String activeProfile;
 
     @RequestMapping("/")
     public String showHomePage(Model model) {
-        SecurityContext sc = SecurityContextHolder.getContext();
-        String currentUserName = sc.getAuthentication().getName();
-        model.addAttribute("currentUser", currentUserName);
+        model.addAttribute("activeProfile", activeProfile);
         return "index";
     }
 

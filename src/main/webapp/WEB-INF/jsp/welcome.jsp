@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<h1>Logged in successfully! Welcome!</h1>
+<h1>Logged in successfully! Welcome ${currentUser}!</h1>
 
 </body>
 </html>
