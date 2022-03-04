@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dxc.qdang.ecommercedemo.exception.UserAlreadyExistsException;
 import com.dxc.qdang.ecommercedemo.model.AppUser;
 import com.dxc.qdang.ecommercedemo.model.AppUserDto;
+import com.dxc.qdang.ecommercedemo.repository.AppAuthorityRepository;
 import com.dxc.qdang.ecommercedemo.repository.AppUserRepository;
 
 @Service
@@ -16,6 +17,9 @@ public class SignupService {
 
     @Autowired
     private AppUserRepository userRepository;
+
+    @Autowired
+    private AppAuthorityRepository authorityRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -32,6 +36,7 @@ public class SignupService {
         user.setEmail(userDto.getEmail());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setDisplayName(userDto.getDisplayName());
+        user.setAuthorities(authorityRepository.findAllByName("User"));
 
         return userRepository.save(user);
     }

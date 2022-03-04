@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class HomeController {
-    
+
     @Value("${spring.profiles.active}")
     private String activeProfile;
 
