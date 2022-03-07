@@ -1,7 +1,7 @@
 package com.dxc.qdang.ecommercedemo.model;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +15,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -61,19 +63,24 @@ public class AppUser {
             name = "app_user_authority",
             joinColumns = @JoinColumn(name = "app_user_id"),
             inverseJoinColumns = @JoinColumn(name = "app_authority_id"))
-    private List<AppAuthority> authorities;
+    private Set<AppAuthority> authorities;
 
     @Column(name = "is_enabled", length = 1, nullable = false)
     @Enumerated(EnumType.STRING)
     private EnabledStatus isEnabled = EnabledStatus.Y;
 
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
+    @Transient
+    Date currentDate = new Date();
+
     @Column(name = "last_login_at")
-    private Date lastLoginAt = new Date();
+    private Date lastLoginAt = currentDate;
 
     @Column(name = "created_at")
-    private Date createdAt = new Date();
+    private Date createdAt = currentDate;
 
     @Column(name = "modified_at")
-    private Date modifiedAt = new Date();
+    private Date modifiedAt = currentDate;
 
 }

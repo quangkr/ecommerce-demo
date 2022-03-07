@@ -36,7 +36,9 @@ public class SignupService {
         user.setEmail(userDto.getEmail());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setDisplayName(userDto.getDisplayName());
-        user.setAuthorities(authorityRepository.findAllByName("User"));
+
+        user.setAuthorities(authorityRepository
+                .findDistinctByNameIgnoreCaseIn("user"));
 
         return userRepository.save(user);
     }
