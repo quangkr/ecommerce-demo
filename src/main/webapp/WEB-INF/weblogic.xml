@@ -15,8 +15,8 @@
       <package-name>javax.validation.*</package-name>
       <package-name>com.oracle.database.*</package-name>
       <package-name>javax.persistence.*</package-name>
-<!--       <package-name>javax.el.*</package-name> -->
-<!--       <package-name>com.sun.el.*</package-name> -->
+      <!-- <package-name>javax.el.*</package-name> -->
+      <!-- <package-name>com.sun.el.*</package-name> -->
     </prefer-application-packages>
     <show-archived-real-path-enabled>true</show-archived-real-path-enabled>
   </container-descriptor>

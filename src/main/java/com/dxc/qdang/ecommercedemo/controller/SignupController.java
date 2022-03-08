@@ -37,11 +37,9 @@ public class SignupController {
         }
 
         try {
-            signupService
-                    .registerNewUser(userDto);
+            signupService.registerNewUser(userDto);
         } catch (UserAlreadyExistsException e) {
-            bindingResult.rejectValue("email", "userDto.email",
-                    "An account already exists with this email address");
+            bindingResult.rejectValue("email", "userDto.email", "An account already exists with this email address");
             return "signup";
         }
 

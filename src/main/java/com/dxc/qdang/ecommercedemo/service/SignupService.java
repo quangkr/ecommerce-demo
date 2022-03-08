@@ -42,22 +42,17 @@ public class SignupService {
         }
 
         Set<AppUser> users = new HashSet<>();
-        Set<AppAuthority> userAuthorities = authorityRepository
-                .findDistinctByNameIgnoreCaseIn("user");
-        Set<AppAuthority> adminAuthorities = authorityRepository
-                .findDistinctByNameIgnoreCaseIn("user", "admin");
+        Set<AppAuthority> userAuthorities = authorityRepository.findDistinctByNameIgnoreCaseIn("user");
+        Set<AppAuthority> adminAuthorities = authorityRepository.findDistinctByNameIgnoreCaseIn("user", "admin");
 
-        users.add(new AppUser("user1@example.com",
-                passwordEncoder.encode("user1Pass"), "User1"));
-        users.add(new AppUser("user2@example.com",
-                passwordEncoder.encode("user2Pass"), "User2"));
+        users.add(new AppUser("user1@example.com", passwordEncoder.encode("user1Pass"), "User1"));
+        users.add(new AppUser("user2@example.com", passwordEncoder.encode("user2Pass"), "User2"));
 
         for (AppUser u : users) {
             u.setAuthorities(userAuthorities);
         }
 
-        AppUser admin = new AppUser("admin@example.com",
-                passwordEncoder.encode("adminPass123"), "Admin");
+        AppUser admin = new AppUser("admin@example.com", passwordEncoder.encode("adminPass123"), "Admin");
         admin.setAuthorities(adminAuthorities);
         users.add(admin);
 
@@ -68,8 +63,7 @@ public class SignupService {
             throws UserAlreadyExistsException {
         if (userExists(userDto.getEmail())) {
             throw new UserAlreadyExistsException(
-                    "There is already an account with email address:"
-                            + userDto.getEmail());
+                    "There is already an account with email address:" + userDto.getEmail());
         }
 
         AppUser user = new AppUser();
@@ -77,8 +71,7 @@ public class SignupService {
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setDisplayName(userDto.getDisplayName());
 
-        user.setAuthorities(authorityRepository
-                .findDistinctByNameIgnoreCaseIn("user"));
+        user.setAuthorities(authorityRepository.findDistinctByNameIgnoreCaseIn("user"));
 
         return userRepository.save(user);
     }

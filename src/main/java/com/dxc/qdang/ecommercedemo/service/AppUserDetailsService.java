@@ -32,10 +32,13 @@ public class AppUserDetailsService implements UserDetailsService {
         boolean accountNonExpired = true;
         boolean credentialsNonExpired = true;
         boolean accountNonLocked = true;
-        return new User(user.getEmail(), user.getPassword(),
+        return new User(
+                user.getEmail(),
+                user.getPassword(),
                 user.getIsEnabled().equals(AppUser.EnabledStatus.Y),
                 accountNonExpired,
-                credentialsNonExpired, accountNonLocked,
+                credentialsNonExpired,
+                accountNonLocked,
                 getAuthorities(user));
     }
 
