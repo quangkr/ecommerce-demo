@@ -13,8 +13,13 @@ public class HomeController {
 
     @RequestMapping("/")
     public String showHomePage(Model model) {
-        model.addAttribute("activeProfile", activeProfile);
         return "index";
+    }
+
+    @RequestMapping("/about")
+    public String showAboutPage(Model model) {
+        model.addAttribute("activeProfile", activeProfile);
+        return "about";
     }
 
 }

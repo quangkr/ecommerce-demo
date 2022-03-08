@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+  pageEncoding="UTF-8"
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,10 @@
 </head>
 <body>
 
-<h1>Logged in successfully! Welcome ${currentUser}!</h1>
+  <%@ include file="/WEB-INF/jspf/header.jspf"%>
+
+  <h1>About</h1>
+  <p>You're on ${activeProfile} profile</p>
 
 </body>
 </html>

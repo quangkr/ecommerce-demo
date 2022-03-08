@@ -1,0 +1,15 @@
+<%@ taglib prefix="sec"
+  uri="http://www.springframework.org/security/tags"
+%>
+<nav>
+  <ul>
+    <li><a href="${pageContext.request.contextPath}/">Home</a></li>
+    <li><a href="${pageContext.request.contextPath}/about">About</a></li>
+    <sec:authorize access="!isAuthenticated()">
+      <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+    </sec:authorize>
+    <sec:authorize access="isAuthenticated()">
+      <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
+    </sec:authorize>
+  </ul>
+</nav>

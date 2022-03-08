@@ -15,6 +15,8 @@ form label {
 </head>
 <body>
 
+<%@ include file="/WEB-INF/jspf/header.jspf"%>
+
   <h1>Signup page</h1>
 
   <form:form action="signup" method="POST" modelAttribute="user">
