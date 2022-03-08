@@ -31,7 +31,7 @@ public class SignupService {
     private PasswordEncoder passwordEncoder;
 
     @PostConstruct
-    public void postConstruct() {
+    private void postConstruct() {
         if (authorityRepository.findByName("User") == null) {
             Set<AppAuthority> authorities = new HashSet<>();
             authorities.add(new AppAuthority("User"));

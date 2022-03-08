@@ -1,6 +1,5 @@
-<%@ taglib prefix="sec"
-  uri="http://www.springframework.org/security/tags"
-%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <nav>
   <ul>
     <li><a href="${pageContext.request.contextPath}/">Home</a></li>
@@ -9,7 +8,9 @@
       <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
     </sec:authorize>
     <sec:authorize access="isAuthenticated()">
-      <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
+      <form:form action="${pageContext.request.contextPath}/logout" method="POST">
+        <button type="submit">Logout</button>
+      </form:form>
     </sec:authorize>
   </ul>
 </nav>
