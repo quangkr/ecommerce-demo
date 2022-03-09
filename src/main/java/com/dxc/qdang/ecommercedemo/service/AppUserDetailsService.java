@@ -1,7 +1,8 @@
 package com.dxc.qdang.ecommercedemo.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.stream.Collectors;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -44,8 +45,8 @@ public class AppUserDetailsService implements UserDetailsService {
 
     private Collection<? extends GrantedAuthority> getAuthorities(
             AppUser user) {
-        return user.getAuthorities().stream()
-                .map(a -> new SimpleGrantedAuthority(a.getName()))
-                .collect(Collectors.toList());
+        List<SimpleGrantedAuthority> result = new ArrayList<>();
+        result.add(new SimpleGrantedAuthority(user.getAuthority().getName()));
+        return result;
     }
 }

@@ -1,8 +1,8 @@
 package com.dxc.qdang.ecommercedemo.model;
 
 import java.util.Date;
-import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,8 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -58,12 +57,10 @@ public class AppUser {
     @Column(name = "profile_picture_url")
     private String profilePictureUrl;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "app_user_authority",
-            joinColumns = @JoinColumn(name = "app_user_id"),
-            inverseJoinColumns = @JoinColumn(name = "app_authority_id"))
-    private Set<AppAuthority> authorities;
+    @NonNull
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(nullable = false)
+    private AppAuthority authority;
 
     @Column(name = "is_enabled", length = 1, nullable = false)
     @Enumerated(EnumType.STRING)

@@ -1,7 +1,5 @@
 package com.dxc.qdang.ecommercedemo.repository;
 
-import java.util.Set;
-
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,9 +11,6 @@ public interface AppAuthorityRepository
 
     AppAuthority findByName(String name);
 
-    Set<AppAuthority> findDistinctByNameIgnoreCaseIn(String... name);
-
-    @Override
-    Set<AppAuthority> findAll();
+    AppAuthority findByNameIgnoreCase(String name);
 
 }

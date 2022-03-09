@@ -32,29 +32,17 @@ public class SignupService {
 
     @PostConstruct
     private void postConstruct() {
-        if (authorityRepository.findByName("User") == null) {
-            Set<AppAuthority> authorities = new HashSet<>();
-            authorities.add(new AppAuthority("User"));
-            authorities.add(new AppAuthority("Editor"));
-            authorities.add(new AppAuthority("Admin"));
-
-            authorityRepository.saveAll(authorities);
-        }
+        AppAuthority userAuthority = new AppAuthority("User");
+        AppAuthority editorAuthority = new AppAuthority("Editor");
+        AppAuthority adminAuthority = new AppAuthority("Admin");
 
         Set<AppUser> users = new HashSet<>();
-        Set<AppAuthority> userAuthorities = authorityRepository.findDistinctByNameIgnoreCaseIn("user");
-        Set<AppAuthority> adminAuthorities = authorityRepository.findDistinctByNameIgnoreCaseIn("user", "admin");
 
-        users.add(new AppUser("user1@example.com", passwordEncoder.encode("user1Pass"), "User1"));
-        users.add(new AppUser("user2@example.com", passwordEncoder.encode("user2Pass"), "User2"));
-
-        for (AppUser u : users) {
-            u.setAuthorities(userAuthorities);
-        }
-
-        AppUser admin = new AppUser("admin@example.com", passwordEncoder.encode("adminPass123"), "Admin");
-        admin.setAuthorities(adminAuthorities);
-        users.add(admin);
+        users.add(new AppUser("user1@example.com", passwordEncoder.encode("user1Pass"), "User1", userAuthority));
+        users.add(new AppUser("user2@example.com", passwordEncoder.encode("user2Pass"), "User2", userAuthority));
+        users.add(
+                new AppUser("editor@example.com", passwordEncoder.encode("editorPass123"), "Editor", editorAuthority));
+        users.add(new AppUser("admin@example.com", passwordEncoder.encode("adminPass123"), "Admin", adminAuthority));
 
         userRepository.saveAll(users);
     }
@@ -71,7 +59,7 @@ public class SignupService {
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setDisplayName(userDto.getDisplayName());
 
-        user.setAuthorities(authorityRepository.findDistinctByNameIgnoreCaseIn("user"));
+        user.setAuthority(authorityRepository.findByNameIgnoreCase("user"));
 
         return userRepository.save(user);
     }
