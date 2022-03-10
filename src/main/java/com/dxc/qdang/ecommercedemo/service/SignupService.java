@@ -14,8 +14,10 @@ import com.dxc.qdang.ecommercedemo.exception.UserAlreadyExistsException;
 import com.dxc.qdang.ecommercedemo.model.AppAuthority;
 import com.dxc.qdang.ecommercedemo.model.AppUser;
 import com.dxc.qdang.ecommercedemo.model.AppUserDto;
+import com.dxc.qdang.ecommercedemo.model.CartDetail;
 import com.dxc.qdang.ecommercedemo.repository.AppAuthorityRepository;
 import com.dxc.qdang.ecommercedemo.repository.AppUserRepository;
+import com.dxc.qdang.ecommercedemo.repository.CartRepository;
 
 @Service
 @Transactional
@@ -26,6 +28,9 @@ public class SignupService {
 
     @Autowired
     private AppAuthorityRepository authorityRepository;
+
+    @Autowired
+    private CartRepository cartRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -44,7 +49,13 @@ public class SignupService {
                 new AppUser("editor@example.com", passwordEncoder.encode("editorPass123"), "Editor", editorAuthority));
         users.add(new AppUser("admin@example.com", passwordEncoder.encode("adminPass123"), "Admin", adminAuthority));
 
-        userRepository.saveAll(users);
+        Iterable<AppUser> returnedUsers = userRepository.saveAll(users);
+        Set<CartDetail> carts = new HashSet<>();
+
+        returnedUsers.forEach(u -> {
+            carts.add(new CartDetail(u));
+        });
+        cartRepository.saveAll(carts);
     }
 
     public AppUser registerNewUser(AppUserDto userDto)
@@ -61,7 +72,11 @@ public class SignupService {
 
         user.setAuthority(authorityRepository.findByNameIgnoreCase("user"));
 
-        return userRepository.save(user);
+        AppUser returnedUser = userRepository.save(user);
+        CartDetail cart = new CartDetail(returnedUser);
+        cartRepository.save(cart);
+
+        return returnedUser;
     }
 
     private boolean userExists(String email) {
