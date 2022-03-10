@@ -6,6 +6,7 @@
     <li><a href="${pageContext.request.contextPath}/about">About</a></li>
     <sec:authorize access="!isAuthenticated()">
       <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+      <li><a href="${pageContext.request.contextPath}/signup">Sign up</a></li>
     </sec:authorize>
     <sec:authorize access="isAuthenticated()">
       <form:form action="${pageContext.request.contextPath}/logout" method="POST">

@@ -1,10 +1,11 @@
 package com.dxc.qdang.ecommercedemo.controller;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,23 +22,23 @@ public class SignupController {
     SignupService signupService;
 
     @GetMapping("/signup")
-    public String showSignupPage(Model model) {
-        AppUserDto userDto = new AppUserDto();
-        model.addAttribute("user", userDto);
+    public String showSignupPage(@ModelAttribute("user") AppUserDto userDto) {
         return "signup";
     }
 
     @PostMapping("/signup")
     public String doSignup(
+            HttpServletRequest request,
             @ModelAttribute("user") @Valid AppUserDto userDto,
-            BindingResult bindingResult,
-            Model model) {
+            BindingResult bindingResult)
+            throws ServletException {
         if (bindingResult.hasErrors()) {
             return "signup";
         }
 
         try {
             signupService.registerNewUser(userDto);
+            request.login(userDto.getEmail(), userDto.getPassword());
         } catch (UserAlreadyExistsException e) {
             bindingResult.rejectValue("email", "userDto.email", "An account already exists with this email address");
             return "signup";
