@@ -3,6 +3,7 @@ package com.dxc.qdang.ecommercedemo.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -44,7 +45,7 @@ public class CartDetail {
     @Transient
     Date currentDate = new Date();
 
-    @OneToMany(mappedBy = "cartDetail", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "cartDetail", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<CartItem> cartItems;
 
     @Column(name = "created_at", updatable = false)
