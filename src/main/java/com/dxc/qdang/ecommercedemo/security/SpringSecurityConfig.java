@@ -1,4 +1,4 @@
-package com.dxc.qdang.ecommercedemo.config;
+package com.dxc.qdang.ecommercedemo.security;
 
 import javax.sql.DataSource;
 
