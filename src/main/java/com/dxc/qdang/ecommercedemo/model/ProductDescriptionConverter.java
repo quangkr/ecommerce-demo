@@ -20,7 +20,7 @@ public class ProductDescriptionConverter implements AttributeConverter<String[],
     @Override
     public String[] convertToEntityAttribute(String dbData) {
         if (dbData == null) {
-            return null;
+            return new String[0];
         }
 
         return dbData.split(SEPARATOR);
