@@ -9,8 +9,9 @@
       <li><a href="${pageContext.request.contextPath}/signup">Sign up</a></li>
     </sec:authorize>
     <sec:authorize access="isAuthenticated()">
+      <li><a href="${pageContext.request.contextPath}/cart">Cart</a></li>
       <form:form action="${pageContext.request.contextPath}/logout" method="POST">
-        <button type="submit">Logout</button>
+        <li><button type="submit">Logout</button></li>
       </form:form>
     </sec:authorize>
   </ul>

@@ -7,26 +7,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.dxc.qdang.ecommercedemo.security.AppUserDetails;
 import com.dxc.qdang.ecommercedemo.service.CartService;
 
 @Controller
-@RequestMapping("/cart/")
+@RequestMapping("/cart")
 public class CartController {
 
     @Autowired
     CartService cartService;
 
-    @GetMapping("")
-    public String showCartPage() {
-        return "cart";
+    @GetMapping(path = { "", "/" })
+    public ModelAndView showCartPage(@AuthenticationPrincipal AppUserDetails userDetails) {
+        return new ModelAndView("cart", "cart", cartService.getCart(userDetails));
     }
 
     @PostMapping("/{id}")
     public String addToCart(@PathVariable(name = "id") Long productId,
-            @AuthenticationPrincipal AppUserDetails userDetail) {
-        cartService.addToCart(userDetail, productId);
+            @AuthenticationPrincipal AppUserDetails userDetails) {
+        cartService.addToCart(userDetails, productId);
 
         return "redirect:/product/" + productId;
     }

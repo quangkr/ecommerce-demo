@@ -24,6 +24,13 @@ public class CartService {
     @Autowired
     CartRepository cartRepository;
 
+    public CartDetail getCart(AppUserDetails userDetails) {
+        AppUser user = new AppUser();
+        user.setId(userDetails.getUserId());
+
+        return cartRepository.findByUser(user);
+    }
+
     public CartDetail addToCart(AppUserDetails userDetails, Long productId) {
         AppUser user = new AppUser();
         user.setId(userDetails.getUserId());

@@ -10,5 +10,26 @@
 
 <body>
 
+  <%@ include file="/WEB-INF/jspf/header.jspf"%>
+
+  <table>
+    <thead>
+      <tr>
+        <th>No.
+        <th>Name
+        <th>Quantity
+      </tr>
+    </thead>
+    <tbody>
+      <c:forEach var="i" varStatus="s" items="${cart.cartItems}">
+        <tr>
+          <td><c:out value="${s.count}" />
+          <td><c:out value="${i.id.product.name}" />
+          <td><c:out value="${i.quantity}" />
+        </tr>
+      </c:forEach>
+    </tbody>
+  </table>
+
 </body>
 </html>
