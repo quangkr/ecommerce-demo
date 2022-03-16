@@ -5,7 +5,7 @@
 <html>
 
 <head>
-<title>Insert title here</title>
+<title><c:out value="${product.name}" /> | Ecommerce demo</title>
 <%@ include file="/WEB-INF/jspf/meta.jspf"%>
 </head>
 

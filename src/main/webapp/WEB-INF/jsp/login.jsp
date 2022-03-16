@@ -2,11 +2,12 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 
+<head>
+<title>Login | Ecommerce demo</title>
+<%@ include file="/WEB-INF/jspf/meta.jspf"%>
 </head>
+
 <body>
 
   <%@ include file="/WEB-INF/jspf/header.jspf"%>

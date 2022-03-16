@@ -3,10 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Homepage | Ecommerce demo</title>
+<%@ include file="/WEB-INF/jspf/meta.jspf"%>
 </head>
+
 <body>
 
   <%@ include file="/WEB-INF/jspf/header.jspf"%>

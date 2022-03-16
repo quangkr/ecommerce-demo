@@ -2,8 +2,9 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Insert title here</title>
+<title>Sign up | Ecommerce demo</title>
 <%@ include file="/WEB-INF/jspf/meta.jspf"%>
 
 <style>
@@ -12,6 +13,7 @@ form label {
 }
 </style>
 </head>
+
 <body>
 
   <%@ include file="/WEB-INF/jspf/header.jspf"%>
