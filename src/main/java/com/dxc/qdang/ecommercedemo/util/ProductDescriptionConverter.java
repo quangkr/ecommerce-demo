@@ -1,4 +1,4 @@
-package com.dxc.qdang.ecommercedemo.model;
+package com.dxc.qdang.ecommercedemo.util;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

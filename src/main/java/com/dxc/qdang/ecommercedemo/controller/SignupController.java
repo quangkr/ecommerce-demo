@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.dxc.qdang.ecommercedemo.dto.AppUserDto;
 import com.dxc.qdang.ecommercedemo.exception.UserAlreadyExistsException;
-import com.dxc.qdang.ecommercedemo.model.AppUserDto;
 import com.dxc.qdang.ecommercedemo.service.SignupService;
 
 @Controller

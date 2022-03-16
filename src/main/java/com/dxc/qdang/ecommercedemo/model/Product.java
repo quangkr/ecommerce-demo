@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
+import com.dxc.qdang.ecommercedemo.util.ProductDescriptionConverter;
 import com.dxc.qdang.ecommercedemo.util.SerializableVersion;
 
 import lombok.AccessLevel;

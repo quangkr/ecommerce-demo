@@ -1,4 +1,4 @@
-package com.dxc.qdang.ecommercedemo.model;
+package com.dxc.qdang.ecommercedemo.util;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
@@ -17,11 +17,7 @@ public class BooleanConverter implements AttributeConverter<Boolean, String> {
 
     @Override
     public Boolean convertToEntityAttribute(String dbData) {
-        if (dbData != null && dbData.equalsIgnoreCase("y")) {
-            return true;
-        }
-
-        return false;
+        return dbData != null && dbData.equalsIgnoreCase("y");
     }
 
 }

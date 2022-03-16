@@ -10,10 +10,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.dxc.qdang.ecommercedemo.dto.AppUserDto;
 import com.dxc.qdang.ecommercedemo.exception.UserAlreadyExistsException;
 import com.dxc.qdang.ecommercedemo.model.AppAuthority;
 import com.dxc.qdang.ecommercedemo.model.AppUser;
-import com.dxc.qdang.ecommercedemo.model.AppUserDto;
 import com.dxc.qdang.ecommercedemo.model.CartDetail;
 import com.dxc.qdang.ecommercedemo.repository.AppAuthorityRepository;
 import com.dxc.qdang.ecommercedemo.repository.AppUserRepository;

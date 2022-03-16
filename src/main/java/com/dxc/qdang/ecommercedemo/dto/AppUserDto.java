@@ -1,4 +1,4 @@
-package com.dxc.qdang.ecommercedemo.model;
+package com.dxc.qdang.ecommercedemo.dto;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
