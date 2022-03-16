@@ -27,7 +27,8 @@
   <p>Category: ${product.category.name}</p>
 
   <form:form action="${pageContext.request.contextPath}/cart/${product.id}" method="POST">
-    <button id="btn-add-to-cart" type="submit">Add to cart</button>
+    <input type="hidden" name="action" value="add" >
+    <button type="submit">Add to cart</button>
   </form:form>
 
 </body>

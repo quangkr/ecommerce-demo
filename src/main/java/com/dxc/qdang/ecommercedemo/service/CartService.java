@@ -25,39 +25,54 @@ public class CartService {
     CartRepository cartRepository;
 
     public CartDetail getCart(AppUserDetails userDetails) {
+        return getCartByUser(userDetails);
+    }
+
+    public CartDetail addProductToCart(AppUserDetails userDetails, long productId, int quantity) {
+        CartDetail cart = getCartByUser(userDetails);
+        CartItem item = getCartItemByProductId(cart, productId);
+        item.setQuantity(item.getQuantity() + quantity);
+
+        return cartRepository.save(cart);
+    }
+
+    public CartDetail updateProductQuantity(AppUserDetails userDetails, long productId, int quantity) {
+        CartDetail cart = getCartByUser(userDetails);
+        CartItem item = getCartItemByProductId(cart, productId);
+        item.setQuantity(quantity);
+
+        return cartRepository.save(cart);
+    }
+
+    private CartDetail getCartByUser(AppUserDetails userDetails) {
         AppUser user = new AppUser();
         user.setId(userDetails.getUserId());
 
         return cartRepository.findByUser(user);
     }
 
-    public CartDetail addToCart(AppUserDetails userDetails, Long productId) {
-        AppUser user = new AppUser();
-        user.setId(userDetails.getUserId());
-        CartDetail cart = cartRepository.findByUser(user);
-
+    private CartItem getCartItemByProductId(CartDetail cart, long productId) {
         List<CartItem> items = cart.getCartItems();
         CartItem item = null;
         for (CartItem i : items) {
             if (Long.compare(i.getId().getProduct().getId(), productId) == 0) {
                 item = i;
-
-                int quantity = item.getQuantity();
-                item.setQuantity(quantity + 1);
                 break;
             }
         }
 
         if (item == null) {
+            CartItemId id = new CartItemId();
+            id.setCartDetail(cart);
+            id.setProduct(productRepository.findById(productId).orElse(null));
+
             item = new CartItem();
-            item.setId(new CartItemId());
-            item.getId().setCartDetail(cart);
-            item.getId().setProduct(productRepository.findById(productId).orElse(null));
-            item.setQuantity(1);
+            item.setId(id);
+            item.setQuantity(0);
         }
         items.add(item);
 
-        return cartRepository.save(cart);
+        return item;
     }
 
 }

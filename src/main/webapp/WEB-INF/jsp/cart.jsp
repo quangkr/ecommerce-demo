@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 
@@ -12,20 +13,25 @@
 
   <%@ include file="/WEB-INF/jspf/header.jspf"%>
 
-  <table>
+  <table class="table table-striped">
     <thead>
       <tr>
-        <th>No.
-        <th>Name
-        <th>Quantity
+        <th scope="col">No.
+        <th scope="col">Name
+        <th scope="col">Quantity
       </tr>
     </thead>
     <tbody>
       <c:forEach var="i" varStatus="s" items="${cart.cartItems}">
         <tr>
-          <td><c:out value="${s.count}" />
+          <th scope="row"><c:out value="${s.count}" />
           <td><c:out value="${i.id.product.name}" />
-          <td><c:out value="${i.quantity}" />
+          <td>
+          <form:form action="${pageContext.request.contextPath}/cart/${i.id.product.id}" method="POST">
+            <input type="hidden" name="action" value="update" >
+            <input type="text" name="quantity" value="${i.quantity}" >
+            <button type="submit">Update</button>
+          </form:form>
         </tr>
       </c:forEach>
     </tbody>

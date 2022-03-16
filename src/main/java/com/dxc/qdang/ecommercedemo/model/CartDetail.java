@@ -45,13 +45,13 @@ public class CartDetail implements Serializable {
     @JoinColumn(unique = true)
     private AppUser user;
 
+    @OneToMany(mappedBy = "id.cartDetail", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<CartItem> cartItems;
+
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
     @Transient
     Date currentDate = new Date();
-
-    @OneToMany(mappedBy = "id.cartDetail", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<CartItem> cartItems;
 
     @Column(name = "created_at", updatable = false)
     private Date createdAt = currentDate;
