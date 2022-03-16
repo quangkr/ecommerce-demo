@@ -19,10 +19,10 @@ import com.dxc.qdang.ecommercedemo.security.AppUserDetails;
 public class CartService {
 
     @Autowired
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
 
     @Autowired
-    CartRepository cartRepository;
+    private CartRepository cartRepository;
 
     public CartDetail getCart(AppUserDetails userDetails) {
         return getCartByUser(userDetails);
