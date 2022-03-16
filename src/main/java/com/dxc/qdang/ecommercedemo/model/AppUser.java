@@ -1,5 +1,6 @@
 package com.dxc.qdang.ecommercedemo.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -29,7 +30,9 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "app_user")
-public class AppUser {
+public class AppUser implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

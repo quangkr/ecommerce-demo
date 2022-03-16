@@ -1,5 +1,6 @@
 package com.dxc.qdang.ecommercedemo.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +30,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class CartDetail {
+public class CartDetail implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,7 +48,7 @@ public class CartDetail {
     @Transient
     Date currentDate = new Date();
 
-    @OneToMany(mappedBy = "cartDetail", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "id.cartDetail", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<CartItem> cartItems;
 
     @Column(name = "created_at", updatable = false)

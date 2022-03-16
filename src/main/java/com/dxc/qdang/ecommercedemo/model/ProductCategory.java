@@ -1,5 +1,7 @@
 package com.dxc.qdang.ecommercedemo.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +21,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class ProductCategory {
+public class ProductCategory implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

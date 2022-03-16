@@ -1,11 +1,9 @@
 package com.dxc.qdang.ecommercedemo.model;
 
+import java.io.Serializable;
+
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,17 +15,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class CartItem {
+public class CartItem implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private static final long serialVersionUID = 1L;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private CartDetail cartDetail;
-
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    private Product product;
+    @EmbeddedId
+    CartItemId id;
 
     private int quantity;
 
