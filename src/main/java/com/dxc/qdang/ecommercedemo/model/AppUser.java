@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.dxc.qdang.ecommercedemo.util.SerializableVersion;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,7 +34,7 @@ import lombok.Setter;
 @Table(name = "app_user")
 public class AppUser implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = SerializableVersion.SERIAL_VERSION_UID;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

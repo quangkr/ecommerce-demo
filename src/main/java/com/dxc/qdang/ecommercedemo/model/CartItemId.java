@@ -6,6 +6,8 @@ import javax.persistence.Embeddable;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 
+import com.dxc.qdang.ecommercedemo.util.SerializableVersion;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,7 +18,7 @@ import lombok.Setter;
 @Embeddable
 public class CartItemId implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = SerializableVersion.SERIAL_VERSION_UID;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private CartDetail cartDetail;

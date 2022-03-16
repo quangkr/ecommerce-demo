@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.dxc.qdang.ecommercedemo.util.SerializableVersion;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +27,7 @@ import lombok.Setter;
 @Table(name = "app_authority")
 public class AppAuthority implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = SerializableVersion.SERIAL_VERSION_UID;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
