@@ -1,6 +1,5 @@
 package com.dxc.qdang.ecommercedemo.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import com.dxc.qdang.ecommercedemo.model.AppUser;
 import com.dxc.qdang.ecommercedemo.model.CartItem;
 import com.dxc.qdang.ecommercedemo.model.OrderDetail;
 import com.dxc.qdang.ecommercedemo.model.OrderItem;
-import com.dxc.qdang.ecommercedemo.model.OrderItemId;
 import com.dxc.qdang.ecommercedemo.repository.CartRepository;
 import com.dxc.qdang.ecommercedemo.repository.OrderRepository;
 import com.dxc.qdang.ecommercedemo.security.AppUserDetails;
@@ -48,19 +46,12 @@ public class OrderService {
         newOrder = orderRepository.save(newOrder);
 
         List<OrderItem> orderItems = newOrder.getOrderItems();
-        if (orderItems == null) {
-            orderItems = new ArrayList<>();
-            newOrder.setOrderItems(orderItems);
-        }
-
         List<CartItem> cartItems = cartRepository.findByUser(user).getCartItems();
         for (CartItem cartItem : cartItems) {
-            OrderItemId orderItemId = new OrderItemId();
-            orderItemId.setOrderDetail(newOrder);
-            orderItemId.setProduct(cartItem.getId().getProduct());
-
             OrderItem orderItem = new OrderItem();
-            orderItem.setId(orderItemId);
+
+            orderItem.setOrderDetail(newOrder);
+            orderItem.setProduct(cartItem.getProduct());
             orderItem.setQuantity(cartItem.getQuantity());
 
             orderItems.add(orderItem);

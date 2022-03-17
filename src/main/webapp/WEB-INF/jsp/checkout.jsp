@@ -58,9 +58,9 @@
       <c:forEach var="i" varStatus="s" items="${cart.cartItems}">
         <tr>
           <th scope="row"><c:out value="${s.count}" />
-          <td><c:out value="${i.id.product.name}" />
+          <td><c:out value="${i.product.name}" />
           <td><c:out value="${i.quantity}" />
-          <td><c:out value="${i.quantity * i.id.product.price}" />
+          <td><c:out value="${i.quantity * i.product.price}" />
         </tr>
       </c:forEach>
     </tbody>

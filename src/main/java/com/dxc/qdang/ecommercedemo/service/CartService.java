@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dxc.qdang.ecommercedemo.model.AppUser;
 import com.dxc.qdang.ecommercedemo.model.CartDetail;
 import com.dxc.qdang.ecommercedemo.model.CartItem;
-import com.dxc.qdang.ecommercedemo.model.CartItemId;
 import com.dxc.qdang.ecommercedemo.repository.CartRepository;
 import com.dxc.qdang.ecommercedemo.repository.ProductRepository;
 import com.dxc.qdang.ecommercedemo.security.AppUserDetails;
@@ -55,19 +54,16 @@ public class CartService {
         List<CartItem> items = cart.getCartItems();
         CartItem item = null;
         for (CartItem i : items) {
-            if (Long.compare(i.getId().getProduct().getId(), productId) == 0) {
+            if (Long.compare(i.getProduct().getId(), productId) == 0) {
                 item = i;
                 break;
             }
         }
 
         if (item == null) {
-            CartItemId id = new CartItemId();
-            id.setCartDetail(cart);
-            id.setProduct(productRepository.findById(productId).orElse(null));
-
             item = new CartItem();
-            item.setId(id);
+            item.setCartDetail(cart);
+            item.setProduct(productRepository.findById(productId).orElse(null));
             item.setQuantity(0);
         }
         items.add(item);

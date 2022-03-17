@@ -1,6 +1,7 @@
 package com.dxc.qdang.ecommercedemo.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -69,8 +70,8 @@ public class OrderDetail implements Serializable {
     @Column(nullable = false)
     private String city;
 
-    @OneToMany(mappedBy = "id.orderDetail", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<OrderItem> orderItems;
+    @OneToMany(mappedBy = "orderDetail", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<OrderItem> orderItems = new ArrayList<>();
 
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)

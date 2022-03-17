@@ -26,13 +26,13 @@
       <c:forEach var="i" varStatus="s" items="${cart.cartItems}">
         <tr>
           <th scope="row"><c:out value="${s.count}" />
-          <td><c:out value="${i.id.product.name}" />
-          <td><form:form action="${pageContext.request.contextPath}/cart/${i.id.product.id}" method="POST">
+          <td><c:out value="${i.product.name}" />
+          <td><form:form action="${pageContext.request.contextPath}/cart/${i.product.id}" method="POST">
               <input type="hidden" name="action" value="update">
               <input type="text" name="quantity" value="${i.quantity}">
               <button type="submit">Update</button>
             </form:form>
-          <td><c:out value="${i.id.product.price}" />
+          <td><c:out value="${i.product.price}" />
         </tr>
       </c:forEach>
     </tbody>

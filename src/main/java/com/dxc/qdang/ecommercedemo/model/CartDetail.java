@@ -1,6 +1,7 @@
 package com.dxc.qdang.ecommercedemo.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -45,8 +46,8 @@ public class CartDetail implements Serializable {
     @JoinColumn(unique = true)
     private AppUser user;
 
-    @OneToMany(mappedBy = "id.cartDetail", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<CartItem> cartItems;
+    @OneToMany(mappedBy = "cartDetail", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<CartItem> cartItems = new ArrayList<>();
 
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
