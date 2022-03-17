@@ -19,6 +19,7 @@
         <th scope="col">No.
         <th scope="col">Name
         <th scope="col">Quantity
+        <th scope="col">Price
       </tr>
     </thead>
     <tbody>
@@ -26,16 +27,18 @@
         <tr>
           <th scope="row"><c:out value="${s.count}" />
           <td><c:out value="${i.id.product.name}" />
-          <td>
-          <form:form action="${pageContext.request.contextPath}/cart/${i.id.product.id}" method="POST">
-            <input type="hidden" name="action" value="update" >
-            <input type="text" name="quantity" value="${i.quantity}" >
-            <button type="submit">Update</button>
-          </form:form>
+          <td><form:form action="${pageContext.request.contextPath}/cart/${i.id.product.id}" method="POST">
+              <input type="hidden" name="action" value="update">
+              <input type="text" name="quantity" value="${i.quantity}">
+              <button type="submit">Update</button>
+            </form:form>
+          <td><c:out value="${i.id.product.price}" />
         </tr>
       </c:forEach>
     </tbody>
   </table>
+
+  <a href="${pageContext.request.contextPath}/cart/checkout">Proceed to checkout</a>
 
 </body>
 </html>

@@ -2,20 +2,20 @@ package com.dxc.qdang.ecommercedemo.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
-import com.dxc.qdang.ecommercedemo.util.BooleanConverter;
 import com.dxc.qdang.ecommercedemo.util.SerializableVersion;
 
 import lombok.AccessLevel;
@@ -32,8 +32,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "app_user")
-public class AppUser implements Serializable {
+public class OrderDetail implements Serializable {
 
     private static final long serialVersionUID = SerializableVersion.SERIAL_VERSION_UID;
 
@@ -42,33 +41,41 @@ public class AppUser implements Serializable {
     private Long id;
 
     @NonNull
-    @Column(nullable = false, unique = true)
-    private String email;
+    @OneToOne(optional = true)
+    @JoinColumn(unique = true)
+    private AppUser user;
 
     @NonNull
     @Column(nullable = false)
-    private String password;
+    private String fullName;
+
+    @NonNull
+    @Column(nullable = false, length = 15)
+    private String phoneNumber;
 
     @NonNull
     @Column(nullable = false)
-    private String displayName;
-
-    private String profilePictureUrl;
+    private String address;
 
     @NonNull
-    @ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE }, optional = false)
-    private AppAuthority authority;
+    @Column(nullable = false)
+    private String ward;
 
-    @Column(length = 1, nullable = false)
-    @Convert(converter = BooleanConverter.class)
-    private boolean enabled = true;
+    @NonNull
+    @Column(nullable = false)
+    private String district;
+
+    @NonNull
+    @Column(nullable = false)
+    private String city;
+
+    @OneToMany(mappedBy = "id.orderDetail", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<OrderItem> orderItems;
 
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
     @Transient
     private Date currentDate = new Date();
-
-    private Date lastLoginAt = currentDate;
 
     @Column(updatable = false)
     private Date createdAt = currentDate;

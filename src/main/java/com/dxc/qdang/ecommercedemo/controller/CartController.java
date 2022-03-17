@@ -1,30 +1,74 @@
 package com.dxc.qdang.ecommercedemo.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dxc.qdang.ecommercedemo.dto.ShippingDetailDto;
+import com.dxc.qdang.ecommercedemo.model.CartDetail;
 import com.dxc.qdang.ecommercedemo.security.AppUserDetails;
 import com.dxc.qdang.ecommercedemo.service.CartService;
+import com.dxc.qdang.ecommercedemo.service.OrderService;
 
 @Controller
 @RequestMapping("/cart")
+@SessionAttributes(names = { "shippingDetail" })
 public class CartController {
 
     @Autowired
     CartService cartService;
 
+    @Autowired
+    OrderService orderService;
+
     @GetMapping(path = { "", "/" })
     public ModelAndView showCartPage(@AuthenticationPrincipal AppUserDetails userDetails) {
         return new ModelAndView("cart", "cart", cartService.getCart(userDetails));
+    }
+
+    @GetMapping("/checkout")
+    public String showCheckoutPage(@AuthenticationPrincipal AppUserDetails userDetails,
+            Model model,
+            @ModelAttribute(name = "shippingDetail") ShippingDetailDto shippingDetail) {
+        CartDetail cart = cartService.getCart(userDetails);
+        model.addAttribute("cart", cart);
+
+        return "checkout";
+    }
+
+    @PostMapping("/checkout")
+    public String confirmCheckout(@AuthenticationPrincipal AppUserDetails userDetails,
+            Model model,
+            @RequestParam(name = "confirm", required = false) String confirm,
+            @ModelAttribute(name = "shippingDetail") @Valid ShippingDetailDto shippingDetail) {
+        CartDetail cart = cartService.getCart(userDetails);
+        model.addAttribute("cart", cart);
+
+        return "checkoutConfirm";
+    }
+
+    @PostMapping("/checkoutConfirm")
+    public String proceedCheckout(@AuthenticationPrincipal AppUserDetails userDetails,
+            @ModelAttribute(name = "shippingDetail") @Valid ShippingDetailDto shippingDetail,
+            SessionStatus sessionStatus) {
+        orderService.addOrder(userDetails, shippingDetail);
+        sessionStatus.setComplete();
+
+        return "checkoutSuccess";
     }
 
     @PostMapping("/{id}")
@@ -41,6 +85,11 @@ public class CartController {
         }
 
         return "redirect:" + referer;
+    }
+
+    @ModelAttribute(name = "shippingDetail")
+    private ShippingDetailDto shippingDetailDto() {
+        return new ShippingDetailDto();
     }
 
 }
