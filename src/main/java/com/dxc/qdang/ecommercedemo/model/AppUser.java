@@ -67,7 +67,7 @@ public class AppUser implements Serializable {
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
     @Transient
-    Date currentDate = new Date();
+    private Date currentDate = new Date();
 
     private Date lastLoginAt = currentDate;
 

@@ -64,12 +64,11 @@ public class Product implements Serializable {
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
     @Transient
-    Date currentDate = new Date();
+    private Date currentDate = new Date();
 
-    @Column(name = "created_at", updatable = false)
+    @Column(updatable = false)
     private Date createdAt = currentDate;
 
-    @Column(name = "modified_at")
     private Date modifiedAt = currentDate;
 
 }
