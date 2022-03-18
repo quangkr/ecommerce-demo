@@ -15,6 +15,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PostLoad;
+import javax.persistence.PostPersist;
+import javax.persistence.PostUpdate;
 import javax.persistence.Transient;
 
 import com.dxc.qdang.ecommercedemo.util.SerializableVersion;
@@ -49,6 +52,10 @@ public class CartDetail implements Serializable {
     @OneToMany(mappedBy = "cartDetail", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItem> cartItems = new ArrayList<>();
 
+    @Transient
+    @Setter(value = AccessLevel.NONE)
+    private int grandTotal;
+
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
     @Transient
@@ -58,5 +65,12 @@ public class CartDetail implements Serializable {
     private Date createdAt = currentDate;
 
     private Date modifiedAt = currentDate;
+
+    @PostPersist
+    @PostUpdate
+    @PostLoad
+    public void updateGrandTotal() {
+        this.grandTotal = cartItems.stream().mapToInt(item -> item.getProduct().getPrice() * item.getQuantity()).sum();
+    }
 
 }

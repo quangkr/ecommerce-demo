@@ -36,6 +36,12 @@
         </tr>
       </c:forEach>
     </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3">Grand total:
+        <td><c:out value="${cart.grandTotal}" />
+      </tr>
+    </tfoot>
   </table>
 
   <a href="${pageContext.request.contextPath}/cart/checkout">Proceed to checkout</a>

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dxc.qdang.ecommercedemo.dto.ShippingDetailDto;
-import com.dxc.qdang.ecommercedemo.model.CartDetail;
 import com.dxc.qdang.ecommercedemo.security.AppUserDetails;
 import com.dxc.qdang.ecommercedemo.service.CartService;
 import com.dxc.qdang.ecommercedemo.service.OrderService;
@@ -41,24 +39,15 @@ public class CartController {
     }
 
     @GetMapping("/checkout")
-    public String showCheckoutPage(@AuthenticationPrincipal AppUserDetails userDetails,
-            Model model,
+    public ModelAndView showCheckoutPage(@AuthenticationPrincipal AppUserDetails userDetails,
             @ModelAttribute(name = "shippingDetail") ShippingDetailDto shippingDetail) {
-        CartDetail cart = cartService.getCart(userDetails);
-        model.addAttribute("cart", cart);
-
-        return "checkout";
+        return new ModelAndView("checkout", "cart", cartService.getCart(userDetails));
     }
 
     @PostMapping("/checkout")
-    public String confirmCheckout(@AuthenticationPrincipal AppUserDetails userDetails,
-            Model model,
-            @RequestParam(name = "confirm", required = false) String confirm,
+    public ModelAndView confirmCheckout(@AuthenticationPrincipal AppUserDetails userDetails,
             @ModelAttribute(name = "shippingDetail") @Valid ShippingDetailDto shippingDetail) {
-        CartDetail cart = cartService.getCart(userDetails);
-        model.addAttribute("cart", cart);
-
-        return "checkoutConfirm";
+        return new ModelAndView("checkoutConfirm", "cart", cartService.getCart(userDetails));
     }
 
     @PostMapping("/checkoutConfirm")

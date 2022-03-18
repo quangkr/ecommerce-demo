@@ -67,7 +67,7 @@
     <tfoot>
       <tr>
         <td colspan="3">Grand total:
-        <td><c:out value="${grandTotal}" />
+        <td><c:out value="${cart.grandTotal}" />
       </tr>
     </tfoot>
   </table>
