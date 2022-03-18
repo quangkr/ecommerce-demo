@@ -46,7 +46,7 @@ public class CartDetail implements Serializable {
     @JoinColumn(unique = true)
     private AppUser user;
 
-    @OneToMany(mappedBy = "cartDetail", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cartDetail", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItem> cartItems = new ArrayList<>();
 
     @Getter(AccessLevel.NONE)

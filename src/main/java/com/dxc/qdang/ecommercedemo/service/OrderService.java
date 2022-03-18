@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dxc.qdang.ecommercedemo.dto.ShippingDetailDto;
 import com.dxc.qdang.ecommercedemo.model.AppUser;
+import com.dxc.qdang.ecommercedemo.model.CartDetail;
 import com.dxc.qdang.ecommercedemo.model.CartItem;
 import com.dxc.qdang.ecommercedemo.model.OrderDetail;
 import com.dxc.qdang.ecommercedemo.model.OrderItem;
@@ -46,8 +47,8 @@ public class OrderService {
         newOrder = orderRepository.save(newOrder);
 
         List<OrderItem> orderItems = newOrder.getOrderItems();
-        List<CartItem> cartItems = cartRepository.findByUser(user).getCartItems();
-        for (CartItem cartItem : cartItems) {
+        CartDetail cart = cartRepository.findByUser(user);
+        for (CartItem cartItem : cart.getCartItems()) {
             OrderItem orderItem = new OrderItem();
 
             orderItem.setOrderDetail(newOrder);
@@ -56,6 +57,9 @@ public class OrderService {
 
             orderItems.add(orderItem);
         }
+
+        cart.getCartItems().clear();
+        cartRepository.save(cart);
 
         return orderRepository.save(newOrder);
     }
