@@ -10,8 +10,9 @@
     </sec:authorize>
     <sec:authorize access="isAuthenticated()">
       <li><a href="${pageContext.request.contextPath}/cart">Cart</a></li>
+      <li><a href="${pageContext.request.contextPath}/order">Orders</a></li>
       <form:form action="${pageContext.request.contextPath}/logout" method="POST">
-        <li><button type="submit">Logout</button></li>
+        <li><button class="btn btn-link p-0" type="submit">Logout</button></li>
       </form:form>
     </sec:authorize>
   </ul>

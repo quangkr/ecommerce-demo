@@ -12,9 +12,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.PostLoad;
+import javax.persistence.PostPersist;
+import javax.persistence.PostUpdate;
 import javax.persistence.Transient;
 
 import com.dxc.qdang.ecommercedemo.util.SerializableVersion;
@@ -42,8 +44,7 @@ public class OrderDetail implements Serializable {
     private Long id;
 
     @NonNull
-    @OneToOne(optional = true)
-    @JoinColumn(unique = true)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private AppUser user;
 
     @NonNull
@@ -73,6 +74,10 @@ public class OrderDetail implements Serializable {
     @OneToMany(mappedBy = "orderDetail", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
+    @Transient
+    @Setter(value = AccessLevel.NONE)
+    private int grandTotal;
+
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
     @Transient
@@ -82,5 +87,12 @@ public class OrderDetail implements Serializable {
     private Date createdAt = currentDate;
 
     private Date modifiedAt = currentDate;
+
+    @PostPersist
+    @PostUpdate
+    @PostLoad
+    public void updateGrandTotal() {
+        this.grandTotal = orderItems.stream().mapToInt(item -> item.getProduct().getPrice() * item.getQuantity()).sum();
+    }
 
 }
