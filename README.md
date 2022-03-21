@@ -2,6 +2,17 @@
 
 Ecommerce web app built with Spring Boot, Oracle database, Oracle Weblogic server.
 
+## Todos
+
+- [x] Login / Sign up
+- [x] Display product list / single product page
+- [x] Add to / Remove from cart
+- [x] Make an order
+- [ ] Show errors in view
+- [ ] Views layout
+- [ ] Sending confirmation email after ordering
+- [ ] Payment information
+
 ## Setup
 
 Requires following dependencies:
