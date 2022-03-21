@@ -29,6 +29,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http
 //                .csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/js/**", "/css/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/product/**").permitAll()
                 .antMatchers("/signup/**").permitAll()
                 .antMatchers("/login/**").permitAll()
@@ -39,9 +40,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
                 .and()
-                .logout()
-                .and()
-                .httpBasic();
+                .logout();
     }
 
 }

@@ -17,3 +17,13 @@
   crossorigin="anonymous"
   defer
 ></script>
+
+<script>
+const APP_CONSTANTS = {
+    contextRoot: '${pageContext.request.contextPath}',
+    csrfParameter: document.querySelector('meta[name="_csrf_parameter"]').getAttribute('content'),
+    csrfHeader: document.querySelector('meta[name="_csrf_header"]').getAttribute('content'),
+    csrfToken: document.querySelector('meta[name="_csrf"]').getAttribute('content'),
+};
+</script>
+<script src="${pageContext.request.contextPath}/js/main.js" defer ></script>
