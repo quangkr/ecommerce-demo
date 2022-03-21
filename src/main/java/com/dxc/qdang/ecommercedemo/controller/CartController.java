@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,7 +47,12 @@ public class CartController {
 
     @PostMapping("/checkout")
     public ModelAndView confirmCheckout(@AuthenticationPrincipal AppUserDetails userDetails,
-            @ModelAttribute(name = "shippingDetail") @Valid ShippingDetailDto shippingDetail) {
+            @ModelAttribute(name = "shippingDetail") @Valid ShippingDetailDto shippingDetail,
+            BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ModelAndView("checkout", "cart", cartService.getCart(userDetails));
+        }
+
         return new ModelAndView("checkoutConfirm", "cart", cartService.getCart(userDetails));
     }
 
