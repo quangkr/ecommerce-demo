@@ -9,6 +9,7 @@ import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
 
 import com.dxc.qdang.ecommercedemo.util.SerializableVersion;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,6 +28,7 @@ public class CartItem implements Serializable {
 
     @Id
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JsonBackReference
     private CartDetail cartDetail;
 
     @Id

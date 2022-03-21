@@ -21,6 +21,7 @@ import javax.persistence.PostUpdate;
 import javax.persistence.Transient;
 
 import com.dxc.qdang.ecommercedemo.util.SerializableVersion;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -50,6 +51,7 @@ public class CartDetail implements Serializable {
     private AppUser user;
 
     @OneToMany(mappedBy = "cartDetail", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<CartItem> cartItems = new ArrayList<>();
 
     @Transient
