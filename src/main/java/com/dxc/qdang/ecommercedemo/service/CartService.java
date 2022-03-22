@@ -1,5 +1,6 @@
 package com.dxc.qdang.ecommercedemo.service;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,18 +28,41 @@ public class CartService {
         return getCartByUser(userDetails);
     }
 
-    public CartDetail addProductToCart(AppUserDetails userDetails, long productId, int quantity) {
+    public CartDetail addProduct(AppUserDetails userDetails, long productId, int quantity) {
         CartDetail cart = getCartByUser(userDetails);
-        CartItem item = getCartItemByProductId(cart, productId);
+        CartItem item = getOrCreateCartItemByProductId(cart, productId);
         item.setQuantity(item.getQuantity() + quantity);
 
         return cartRepository.save(cart);
     }
 
-    public CartDetail updateProductQuantity(AppUserDetails userDetails, long productId, int quantity) {
+    public CartDetail setProductQuantity(AppUserDetails userDetails, long productId, int quantity) {
         CartDetail cart = getCartByUser(userDetails);
-        CartItem item = getCartItemByProductId(cart, productId);
+
+        if (quantity <= 0) {
+            Iterator<CartItem> iter = cart.getCartItems().iterator();
+            while (iter.hasNext()) {
+                if (iter.next().getProduct().getId() == productId) {
+                    iter.remove();
+                    return cartRepository.save(cart);
+                }
+            }
+        }
+
+        CartItem item = getOrCreateCartItemByProductId(cart, productId);
         item.setQuantity(quantity);
+
+        return cartRepository.save(cart);
+    }
+
+    public CartDetail removeProducts(AppUserDetails userDetails, List<Long> productIds) {
+        CartDetail cart = getCartByUser(userDetails);
+        Iterator<CartItem> iter = cart.getCartItems().iterator();
+        while (iter.hasNext()) {
+            if (productIds.contains(iter.next().getProduct().getId())) {
+                iter.remove();
+            }
+        }
 
         return cartRepository.save(cart);
     }
@@ -50,22 +74,18 @@ public class CartService {
         return cartRepository.findByUser(user);
     }
 
-    private CartItem getCartItemByProductId(CartDetail cart, long productId) {
+    private CartItem getOrCreateCartItemByProductId(CartDetail cart, long productId) {
         List<CartItem> items = cart.getCartItems();
-        CartItem item = null;
-        for (CartItem i : items) {
-            if (Long.compare(i.getProduct().getId(), productId) == 0) {
-                item = i;
-                break;
+        for (CartItem item : items) {
+            if (item.getProduct().getId() == productId) {
+                return item;
             }
         }
 
-        if (item == null) {
-            item = new CartItem();
-            item.setCartDetail(cart);
-            item.setProduct(productRepository.findById(productId).orElse(null));
-            item.setQuantity(0);
-        }
+        CartItem item = new CartItem();
+        item.setCartDetail(cart);
+        item.setProduct(productRepository.findById(productId).orElse(null));
+        item.setQuantity(0);
         items.add(item);
 
         return item;
