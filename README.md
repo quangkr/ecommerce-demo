@@ -8,7 +8,7 @@ Ecommerce web app built with Spring Boot, Oracle database, Oracle Weblogic serve
 - [x] Display product list / single product page
 - [x] Add to / Remove from cart
 - [x] Make an order
-- [ ] Show errors in view
+- [x] Show errors in view
 - [ ] Views layout
 - [ ] Sending confirmation email after ordering
 - [ ] Payment information

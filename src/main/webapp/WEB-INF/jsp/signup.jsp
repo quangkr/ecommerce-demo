@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 
@@ -14,20 +15,45 @@
 
   <h1>Signup page</h1>
 
-  <form:form action="${root}/signup" method="POST" modelAttribute="user">
-    <div class="form-floating mt-3">
-      <form:input path="email" type="email" id="form-email" placeholder="Email" cssClass="form-control" />
-      <form:label path="email" for="form-email">Email</form:label>
-    </div>
-    <div class="form-floating mt-3">
-      <form:password path="password" id="form-password" placeholder="Password" cssClass="form-control" />
-      <form:label path="password" for="form-password">Password</form:label>
-    </div>
-    <div class="form-floating mt-3">
-      <form:input path="displayName" type="text" id="form-display-name" placeholder="Display name" cssClass="form-control" />
-      <form:label path="displayName" for="form-display-name">Display name</form:label>
-    </div>
-    <form:errors path="*" />
+  <form:form action="${root}/signup" method="POST" modelAttribute="user" novalidate="true">
+    <spring:bind path="email">
+      <div class="form-floating mt-3">
+        <form:input
+          path="email"
+          type="email"
+          id="form-email"
+          placeholder="Email"
+          cssClass="form-control ${status.error ? 'is-invalid' : ''}"
+        />
+        <form:label path="email" for="form-email">Email</form:label>
+        <form:errors path="email" cssClass="invalid-feedback" element="div" />
+      </div>
+    </spring:bind>
+    <spring:bind path="password">
+      <div class="form-floating mt-3">
+        <form:password
+          path="password"
+          id="form-password"
+          placeholder="Password"
+          cssClass="form-control ${status.error ? 'is-invalid' : ''}"
+        />
+        <form:label path="password" for="form-password">Password</form:label>
+        <form:errors path="password" cssClass="invalid-feedback" element="div" />
+      </div>
+    </spring:bind>
+    <spring:bind path="displayName">
+      <div class="form-floating mt-3">
+        <form:input
+          path="displayName"
+          type="text"
+          id="form-display-name"
+          placeholder="Display name"
+          cssClass="form-control ${status.error ? 'is-invalid' : ''}"
+        />
+        <form:label path="displayName" for="form-display-name">Display name</form:label>
+        <form:errors path="displayName" cssClass="invalid-feedback" element="div" />
+      </div>
+    </spring:bind>
     <form:button type="submit">Submit</form:button>
   </form:form>
 
