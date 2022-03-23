@@ -5,8 +5,8 @@
 <html>
 
 <head>
-<title>Confirm checkout | Ecommerce demo</title>
-<%@ include file="/WEB-INF/jspf/meta.jspf"%>
+  <title>Confirm checkout | Ecommerce demo</title>
+  <%@ include file="/WEB-INF/jspf/meta.jspf"%>
 </head>
 
 <body>
@@ -25,8 +25,8 @@
   </div>
 
   <div>
-    <a href="${pageContext.request.contextPath}/cart/checkout">Back</a>
-    <form:form action="${pageContext.request.contextPath}/cart/checkoutConfirm" method="POST">
+    <a href="${root}/cart/checkout">Back</a>
+    <form:form action="${root}/cart/checkoutConfirm" method="POST">
       <button type="submit">Checkout</button>
     </form:form>
   </div>

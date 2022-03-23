@@ -4,14 +4,8 @@
 <html>
 
 <head>
-<title>Sign up | Ecommerce demo</title>
-<%@ include file="/WEB-INF/jspf/meta.jspf"%>
-
-<style>
-form label {
-  display: block;
-}
-</style>
+  <title>Sign up | Ecommerce demo</title>
+  <%@ include file="/WEB-INF/jspf/meta.jspf"%>
 </head>
 
 <body>
@@ -20,17 +14,21 @@ form label {
 
   <h1>Signup page</h1>
 
-  <form:form action="${pageContext.request.contextPath}/signup" method="POST" modelAttribute="user">
+  <form:form action="${root}/signup" method="POST" modelAttribute="user">
     <div class="form-floating mt-3">
-      <form:input path="email" id="form-email" cssClass="form-control" type="text" />
-      <form:label for="form-email" path="email">Email</form:label>
-      <form:password path="password" id="form-password" cssClass="form-control" />
-      <form:label for="form-password" path="password">Password</form:label>
-      <form:input path="displayName" id="form-display-name" cssClass="form-control" type="text" />
-      <form:label for="form-display-name" path="displayName">Display name</form:label>
-      <form:errors path="*" />
-      <form:button type="submit">Submit</form:button>
+      <form:input path="email" type="email" id="form-email" placeholder="Email" cssClass="form-control" />
+      <form:label path="email" for="form-email">Email</form:label>
     </div>
+    <div class="form-floating mt-3">
+      <form:password path="password" id="form-password" placeholder="Password" cssClass="form-control" />
+      <form:label path="password" for="form-password">Password</form:label>
+    </div>
+    <div class="form-floating mt-3">
+      <form:input path="displayName" type="text" id="form-display-name" placeholder="Display name" cssClass="form-control" />
+      <form:label path="displayName" for="form-display-name">Display name</form:label>
+    </div>
+    <form:errors path="*" />
+    <form:button type="submit">Submit</form:button>
   </form:form>
 
 </body>

@@ -12,7 +12,7 @@
 
 <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
   <div class="container-xxl px-3">
-    <a class="navbar-brand" href="${root}" style="font-family: Audiowide;">TechShop</a>
+    <a class="navbar-brand" href="${root}" style="font-family: Audiowide">TechShop</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -25,7 +25,7 @@
     </button>
     <div class="offcanvas offcanvas-start" tabindex="-1" id="navbarMainContent" aria-labelledby="navbarLabel">
       <div class="offcanvas-header">
-        <a class="navbar-brand" id="navbarLabel" href="${root}" style="font-family: Audiowide;">TechShop</a>
+        <a class="navbar-brand" id="navbarLabel" href="${root}" style="font-family: Audiowide">TechShop</a>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
@@ -40,11 +40,31 @@
           </sec:authorize>
           <sec:authorize access="isAuthenticated()">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">User</a>
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                >User</a
+              >
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li class="nav-item"><a href="${root}/cart" ${fn:contains(currentURI, "cart.jsp") ? dropdownCurrentAttr : dropdownNotCurrentAttr}>Cart</a></li>
-                <li class="nav-item"><a href="${root}/order" ${fn:contains(currentURI, "order.jsp") ? dropdownCurrentAttr : dropdownNotCurrentAttr}>Order</a></li>
-                <li><hr class="dropdown-divider"></li>
+                <li class="nav-item">
+                  <a
+                    href="${root}/cart"
+                    ${fn:contains(currentURI, "cart.jsp") ? dropdownCurrentAttr : dropdownNotCurrentAttr}
+                    >Cart</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    href="${root}/order"
+                    ${fn:contains(currentURI, "order.jsp") ? dropdownCurrentAttr : dropdownNotCurrentAttr}
+                    >Order</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
                 <li>
                   <form:form action="${root}/logout" method="POST">
                     <button class="dropdown-item btn" type="submit">Logout</button>

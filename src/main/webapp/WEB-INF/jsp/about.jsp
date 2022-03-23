@@ -3,8 +3,8 @@
 <html>
 
 <head>
-<title>About | Ecommerce demo</title>
-<%@ include file="/WEB-INF/jspf/meta.jspf"%>
+  <title>About | Ecommerce demo</title>
+  <%@ include file="/WEB-INF/jspf/meta.jspf"%>
 </head>
 
 <body>

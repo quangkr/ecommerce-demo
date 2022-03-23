@@ -5,15 +5,15 @@
 <html>
 
 <head>
-<title>Checkout | Ecommerce demo</title>
-<%@ include file="/WEB-INF/jspf/meta.jspf"%>
+  <title>Checkout | Ecommerce demo</title>
+  <%@ include file="/WEB-INF/jspf/meta.jspf"%>
 </head>
 
 <body>
 
   <%@ include file="/WEB-INF/jspf/header.jspf"%>
 
-  <form:form action="${pageContext.request.contextPath}/cart/checkout" method="POST" modelAttribute="shippingDetail"
+  <form:form action="${root}/cart/checkout" method="POST" modelAttribute="shippingDetail"
     cssClass="row g-3"
   >
     <div class="col-12">

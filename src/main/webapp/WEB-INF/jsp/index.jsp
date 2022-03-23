@@ -5,8 +5,8 @@
 <html>
 
 <head>
-<title>Homepage | Ecommerce demo</title>
-<%@ include file="/WEB-INF/jspf/meta.jspf"%>
+  <title>Homepage | Ecommerce demo</title>
+  <%@ include file="/WEB-INF/jspf/meta.jspf"%>
 </head>
 
 <body>
@@ -27,7 +27,7 @@
   <section>
     <c:forEach var="p" items="${products}">
       <p>
-        <a href="${pageContext.request.contextPath}/product/${p.id}">Item <c:out value="${p.name}" /></a>
+        <a href="${root}/product/${p.id}">Item <c:out value="${p.name}" /></a>
       </p>
     </c:forEach>
   </section>

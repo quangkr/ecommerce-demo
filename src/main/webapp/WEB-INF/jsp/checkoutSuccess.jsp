@@ -3,8 +3,8 @@
 <html>
 
 <head>
-<title>Checkout success | Ecommerce demo</title>
-<%@ include file="/WEB-INF/jspf/meta.jspf"%>
+  <title>Checkout success | Ecommerce demo</title>
+  <%@ include file="/WEB-INF/jspf/meta.jspf"%>
 </head>
 
 <body>
@@ -13,7 +13,7 @@
 
   <p>Success! Your order is being processed</p>
 
-  <a href="${pageContext.request.contextPath}">Continue shopping</a>
+  <a href="${root}">Continue shopping</a>
 
 </body>
 </html>

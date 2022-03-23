@@ -4,8 +4,8 @@
 <html>
 
 <head>
-<title>Login | Ecommerce demo</title>
-<%@ include file="/WEB-INF/jspf/meta.jspf"%>
+  <title>Login | Ecommerce demo</title>
+  <%@ include file="/WEB-INF/jspf/meta.jspf"%>
 </head>
 
 <body>
@@ -14,13 +14,13 @@
 
   <h1>Login page</h1>
 
-  <form action="${pageContext.request.contextPath}/login" method="POST">
+  <form action="${root}/login" method="POST">
     <sec:csrfInput />
     <div>
-      <label>Username <input type="text" name="username"></label>
+      <label>Username <input type="text" name="username" /></label>
     </div>
     <div>
-      <label>Password <input type="password" name="password"></label>
+      <label>Password <input type="password" name="password" /></label>
     </div>
     <button type="submit">Submit</button>
   </form>

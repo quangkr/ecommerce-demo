@@ -4,8 +4,8 @@
 <html>
 
 <head>
-<title>Orders | Ecommerce demo</title>
-<%@ include file="/WEB-INF/jspf/meta.jspf"%>
+  <title>Orders | Ecommerce demo</title>
+  <%@ include file="/WEB-INF/jspf/meta.jspf"%>
 </head>
 
 <body>
@@ -13,13 +13,7 @@
   <%@ include file="/WEB-INF/jspf/header.jspf"%>
 
   <c:forEach var="o" varStatus="oStatus" items="${orders}">
-    <h2>
-      Order #
-      <c:out value="${oStatus.count}" />
-      : (
-      <c:out value="${o.createdAt}" />
-      )
-    </h2>
+    <h2>Order <c:out value="#${oStatus.count} (${o.createdAt})"/></h2>
     <table class="table table-striped">
       <thead>
         <tr>
