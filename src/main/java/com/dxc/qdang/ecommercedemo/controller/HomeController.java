@@ -1,33 +1,37 @@
 package com.dxc.qdang.ecommercedemo.controller;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.dxc.qdang.ecommercedemo.model.Product;
-import com.dxc.qdang.ecommercedemo.repository.ProductRepository;
+import com.dxc.qdang.ecommercedemo.service.ProductService;
 
 @Controller
 public class HomeController {
 
     @Autowired
-    ProductRepository productRepository;
+    ProductService productService;
 
     @Value("${spring.profiles.active}")
     private String activeProfile;
 
     @RequestMapping("/")
-    public ModelAndView showHomePage(Model model) {
-        List<Product> products = StreamSupport.stream(productRepository.findAll().spliterator(), false)
-                .collect(Collectors.toList());
-        return new ModelAndView("index", "products", products);
+    public String showHomePage(Model model) {
+        Pageable pageable = PageRequest.of(0, 5, Sort.by("price").descending());
+        Page<Product> cellphones = productService.getProductsByCategory("cellphone", pageable);
+        Page<Product> laptops = productService.getProductsByCategory("laptop", pageable);
+
+        model.addAttribute("cellphones", cellphones.getContent());
+        model.addAttribute("laptops", laptops.getContent());
+
+        return "index";
     }
 
     @RequestMapping("/about")

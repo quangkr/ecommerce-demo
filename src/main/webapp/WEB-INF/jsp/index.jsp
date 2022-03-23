@@ -25,9 +25,19 @@
   </sec:authorize>
 
   <section>
-    <c:forEach var="p" items="${products}">
+    <h2>Top Cellphones</h2>
+    <c:forEach var="p" items="${cellphones}">
       <p>
-        <a href="${root}/product/${p.id}">Item <c:out value="${p.name}" /></a>
+        <a href="${root}/product/show?id=${p.id}">Item <c:out value="${p.name}" /></a>
+      </p>
+    </c:forEach>
+  </section>
+
+  <section>
+    <h2>Top Laptops</h2>
+    <c:forEach var="p" items="${laptops}">
+      <p>
+        <a href="${root}/product/show?id=${p.id}">Item <c:out value="${p.name}" /></a>
       </p>
     </c:forEach>
   </section>
