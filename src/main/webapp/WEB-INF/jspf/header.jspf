@@ -1,19 +1,60 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<nav>
-  <ul>
-    <li><a href="${pageContext.request.contextPath}/">Home</a></li>
-    <li><a href="${pageContext.request.contextPath}/about">About</a></li>
-    <sec:authorize access="!isAuthenticated()">
-      <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
-      <li><a href="${pageContext.request.contextPath}/signup">Sign up</a></li>
-    </sec:authorize>
-    <sec:authorize access="isAuthenticated()">
-      <li><a href="${pageContext.request.contextPath}/cart">Cart</a></li>
-      <li><a href="${pageContext.request.contextPath}/order">Orders</a></li>
-      <form:form action="${pageContext.request.contextPath}/logout" method="POST">
-        <li><button class="btn btn-link p-0" type="submit">Logout</button></li>
-      </form:form>
-    </sec:authorize>
-  </ul>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<c:set var="root" value="${pageContext.servletContext.contextPath}"/>
+<c:set var="currentURI" value="${pageContext.request.requestURI}"/>
+<c:set var="currentAttr" value="class=\"nav-link active\" aria-current=\"page\""/>
+<c:set var="notCurrentAttr" value="class=\"nav-link\""/>
+<c:set var="dropdownCurrentAttr" value="class=\"dropdown-item active\" aria-current=\"page\""/>
+<c:set var="dropdownNotCurrentAttr" value="class=\"dropdown-item\""/>
+
+<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+  <div class="container-xxl px-3">
+    <a class="navbar-brand" href="${root}" style="font-family: Audiowide;">TechShop</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#navbarMainContent"
+      aria-controls="navbarMainContent"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="navbarMainContent" aria-labelledby="navbarLabel">
+      <div class="offcanvas-header">
+        <a class="navbar-brand" id="navbarLabel" href="${root}" style="font-family: Audiowide;">TechShop</a>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-start flex-grow-1 ps-3 mb-2 mb-lg-0">
+          <li class="nav-item"><a href="${root}" ${fn:contains(currentURI, "index.jsp") ? currentAttr : notCurrentAttr}>Home</a></li>
+          <li class="nav-item"><a href="${root}/about" ${fn:contains(currentURI, "about.jsp") ? currentAttr : notCurrentAttr}>About</a></li>
+        </ul>
+        <ul class="navbar-nav justify-content-end flex-grow-1 ps-3 mb-2 mb-lg-0">
+          <sec:authorize access="!isAuthenticated()">
+            <li class="nav-item"><a href="${root}/login" ${fn:contains(currentURI, "login.jsp") ? currentAttr : notCurrentAttr}>Login</a></li>
+            <li class="nav-item"><a href="${root}/signup" ${fn:contains(currentURI, "signup.jsp") ? currentAttr : notCurrentAttr}>Signup</a></li>
+          </sec:authorize>
+          <sec:authorize access="isAuthenticated()">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">User</a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li class="nav-item"><a href="${root}/cart" ${fn:contains(currentURI, "cart.jsp") ? dropdownCurrentAttr : dropdownNotCurrentAttr}>Cart</a></li>
+                <li class="nav-item"><a href="${root}/order" ${fn:contains(currentURI, "order.jsp") ? dropdownCurrentAttr : dropdownNotCurrentAttr}>Order</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                  <form:form action="${root}/logout" method="POST">
+                    <button class="dropdown-item btn" type="submit">Logout</button>
+                  </form:form>
+                </li>
+              </ul>
+            </li>
+          </sec:authorize>
+        </ul>
+      </div>
+    </div>
+  </div>
 </nav>
