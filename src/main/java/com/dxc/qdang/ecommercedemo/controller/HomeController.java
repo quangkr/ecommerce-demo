@@ -1,7 +1,6 @@
 package com.dxc.qdang.ecommercedemo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,9 +18,6 @@ public class HomeController {
     @Autowired
     ProductService productService;
 
-    @Value("${spring.profiles.active}")
-    private String activeProfile;
-
     @RequestMapping("/")
     public String showHomePage(Model model) {
         Pageable pageable = PageRequest.of(0, 5, Sort.by("price").descending());
@@ -32,12 +28,6 @@ public class HomeController {
         model.addAttribute("laptops", laptops.getContent());
 
         return "index";
-    }
-
-    @RequestMapping("/about")
-    public String showAboutPage(Model model) {
-        model.addAttribute("activeProfile", activeProfile);
-        return "about";
     }
 
 }
