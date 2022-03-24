@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -28,7 +29,7 @@
     <h2>Top Cellphones</h2>
     <c:forEach var="p" items="${cellphones}">
       <p>
-        <a href="${root}/product/show?id=${p.id}">Item <c:out value="${p.name}" /></a>
+        <my:link url="/product/show?id=${p.id}">Item <c:out value="${p.name}" /></my:link>
       </p>
     </c:forEach>
   </section>
@@ -37,7 +38,7 @@
     <h2>Top Laptops</h2>
     <c:forEach var="p" items="${laptops}">
       <p>
-        <a href="${root}/product/show?id=${p.id}">Item <c:out value="${p.name}" /></a>
+        <my:link url="/product/show?id=${p.id}">Item <c:out value="${p.name}" /></my:link>
       </p>
     </c:forEach>
   </section>

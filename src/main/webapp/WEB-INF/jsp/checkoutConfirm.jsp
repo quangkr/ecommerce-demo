@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 
@@ -26,9 +26,9 @@
 
   <div>
     <a href="${root}/cart/checkout">Back</a>
-    <form:form action="${root}/cart/checkoutConfirm" method="POST">
+    <my:form url="/cart/checkoutConfirm" method="POST">
       <button type="submit">Checkout</button>
-    </form:form>
+    </my:form>
   </div>
 
   <table class="table table-striped">

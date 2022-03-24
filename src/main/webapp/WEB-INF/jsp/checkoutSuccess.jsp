@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html>
 
@@ -13,7 +14,7 @@
 
   <p>Success! Your order is being processed</p>
 
-  <a href="${root}">Continue shopping</a>
+  <my:link url="/">Continue shopping</my:link>
 
 </body>
 </html>

@@ -13,7 +13,8 @@
 
   <%@ include file="/WEB-INF/jspf/header.jspf"%>
 
-  <form:form action="${root}/cart/checkout" method="POST" modelAttribute="shippingDetail"
+  <c:url value="/cart/checkout" var="checkoutUrl" />
+  <form:form action="${checkoutUrl}" method="POST" modelAttribute="shippingDetail"
     cssClass="row g-3"
   >
     <div class="col-12">

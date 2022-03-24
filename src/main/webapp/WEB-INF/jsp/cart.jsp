@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -42,13 +43,15 @@
     </tbody>
     <tfoot>
       <tr>
-        <td colspan="3">Grand total:</td>
+        <td colspan="4">Grand total:</td>
         <td><c:out value="${cart.grandTotal}" />
       </tr>
     </tfoot>
   </table>
 
-  <a href="${root}/cart/checkout">Proceed to checkout</a>
+  <p>
+    <my:link url="/cart/checkout">Proceed to checkout</my:link>
+  </p>
 
 </body>
 </html>
