@@ -15,19 +15,10 @@
   <%@ include file="/WEB-INF/jspf/header.jspf"%>
 
   <div class="container-xxl py-5 px-4">
-    <sec:authorize access="!isAuthenticated()">
-      <h1>Welcome to Ecommerce Demo app.</h1>
-    </sec:authorize>
-    <sec:authorize access="isAuthenticated()">
-      <h1>
-        Welcome back to Ecommerce Demo app,
-        <sec:authentication property="name" />
-        !
-      </h1>
-    </sec:authorize>
+    <h1 class="my-3">Welcome to Ecommerce Demo app.</h1>
 
     <section>
-      <h2>Top Cellphones</h2>
+      <h2 class="mb-3 mt-5">Top Cellphones</h2>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4">
         <c:forEach var="p" items="${cellphones}">
           <div class="col">
@@ -44,7 +35,7 @@
     </section>
 
     <section>
-      <h2>Top Laptops</h2>
+      <h2 class="mb-3 mt-5">Top Laptops</h2>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4">
         <c:forEach var="p" items="${laptops}">
           <div class="col">

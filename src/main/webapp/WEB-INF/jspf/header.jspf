@@ -38,7 +38,7 @@
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
-                >User</my:link>
+                ><sec:authentication property="name" /></my:link>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <li class="nav-item"><my:hlink cssClass="dropdown-item" url="/cart">Cart</my:hlink></li>
                 <li class="nav-item"><my:hlink cssClass="dropdown-item" url="/order">Order</my:hlink></li>
