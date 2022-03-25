@@ -27,20 +27,36 @@
 
   <section>
     <h2>Top Cellphones</h2>
-    <c:forEach var="p" items="${cellphones}">
-      <p>
-        <my:link url="/product/show?id=${p.id}">Item <c:out value="${p.name}" /></my:link>
-      </p>
-    </c:forEach>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4">
+      <c:forEach var="p" items="${cellphones}">
+        <div class="col">
+          <my:product-card
+            url="/product/show?id=${p.id}"
+            name="${p.name}"
+            imgSrc="${p.thumbnailUrl}"
+            description="${p.description}"
+            price="${p.price}"
+          ></my:product-card>
+        </div>
+      </c:forEach>
+    </div>
   </section>
 
   <section>
     <h2>Top Laptops</h2>
-    <c:forEach var="p" items="${laptops}">
-      <p>
-        <my:link url="/product/show?id=${p.id}">Item <c:out value="${p.name}" /></my:link>
-      </p>
-    </c:forEach>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4">
+      <c:forEach var="p" items="${laptops}">
+        <div class="col">
+          <my:product-card
+            url="/product/show?id=${p.id}"
+            name="${p.name}"
+            imgSrc="${p.thumbnailUrl}"
+            description="${p.description}"
+            price="${p.price}"
+          ></my:product-card>
+        </div>
+      </c:forEach>
+    </div>
   </section>
 
 </body>

@@ -22,11 +22,19 @@
 <body>
   <%@ include file="/WEB-INF/jspf/header.jspf"%>
 
-  <c:forEach var="p" items="${productPage.content}">
-    <p>
-      <my:link url="/product/show?id=${p.id}">Item <c:out value="${p.name}" /></my:link>
-    </p>
-  </c:forEach>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+    <c:forEach var="p" items="${productPage.content}">
+      <div class="col">
+        <my:product-card
+          url="/product/show?id=${p.id}"
+          name="${p.name}"
+          imgSrc="${p.thumbnailUrl}"
+          description="${p.description}"
+          price="${p.price}"
+        ></my:product-card>
+      </div>
+    </c:forEach>
+  </div>
 
   <my:pagination
     url='/product${categoryParam}${categoryName}'
