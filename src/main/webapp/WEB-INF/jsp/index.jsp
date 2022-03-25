@@ -32,7 +32,7 @@
         <c:forEach var="p" items="${cellphones}">
           <div class="col">
             <my:product-card
-              url="/product/show?id=${p.id}"
+              url="/product/${p.id}"
               name="${p.name}"
               imgSrc="${p.thumbnailUrl}"
               description="${p.description}"
@@ -49,7 +49,7 @@
         <c:forEach var="p" items="${laptops}">
           <div class="col">
             <my:product-card
-              url="/product/show?id=${p.id}"
+              url="/product/${p.id}"
               name="${p.name}"
               imgSrc="${p.thumbnailUrl}"
               description="${p.description}"

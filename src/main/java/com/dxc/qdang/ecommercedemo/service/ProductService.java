@@ -1,5 +1,7 @@
 package com.dxc.qdang.ecommercedemo.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,11 +26,11 @@ public class ProductService {
         return productRepository.findById(productId).orElse(null);
     }
 
-    public Page<Product> getProductsByCategory(String categoryName, Pageable pageable) {
-        if (categoryName == null) {
+    public Page<Product> getProductsByCategory(Optional<String> categoryName, Pageable pageable) {
+        if (!categoryName.isPresent()) {
             return productRepository.findAll(pageable);
         }
-        return productRepository.findByCategory(productCategoryRepository.findByName(categoryName), pageable);
+        return productRepository.findByCategory(productCategoryRepository.findByName(categoryName.get()), pageable);
     }
 
 }

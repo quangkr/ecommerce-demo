@@ -21,8 +21,8 @@
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-start flex-grow-1 ps-3 mb-2 mb-md-0">
-          <li class="nav-item"><my:hlink cssClass="nav-link" url="/product?category=cellphone">Cellphone</my:hlink></li>
-          <li class="nav-item"><my:hlink cssClass="nav-link" url="/product?category=laptop">Laptop</my:hlink></li>
+          <li class="nav-item"><my:hlink cssClass="nav-link" url="/products/cellphone">Cellphone</my:hlink></li>
+          <li class="nav-item"><my:hlink cssClass="nav-link" url="/products/laptop">Laptop</my:hlink></li>
         </ul>
         <ul class="navbar-nav justify-content-end flex-grow-1 ps-3 mb-2 mb-md-0">
           <sec:authorize access="!isAuthenticated()">

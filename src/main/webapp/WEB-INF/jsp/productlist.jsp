@@ -1,22 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<c:if test="${empty displayedCategoryName}">
-  <c:set var="title" value="Products" />
-</c:if>
-<c:if test="${!empty displayedCategoryName}">
-  <c:set var="title" value="${displayedCategoryName}" />
-</c:if>
-<c:if test="${!empty categoryName}">
-  <c:set var="categoryParam" value="?category=" />
-</c:if>
-
 <!DOCTYPE html>
 <html>
 
 <head>
-  <title><c:out value='${title}' /> | Ecommerce demo</title>
+  <title><c:out value="${title}" /> | Ecommerce demo</title>
   <%@ include file="/WEB-INF/jspf/meta.jspf"%>
 </head>
 
@@ -28,7 +17,7 @@
       <c:forEach var="p" items="${productPage.content}">
         <div class="col">
           <my:product-card
-            url="/product/show?id=${p.id}"
+            url="/product/${p.id}"
             name="${p.name}"
             imgSrc="${p.thumbnailUrl}"
             description="${p.description}"
@@ -40,7 +29,7 @@
 
     <div class="mt-4">
       <my:pagination
-        url='/product${categoryParam}${categoryName}'
+        url="/product/${categoryName}"
         total="${productPage.totalPages}"
         current="${productPage.number + 1}"
       ></my:pagination>
