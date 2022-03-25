@@ -13,6 +13,8 @@
   <%@ include file="/WEB-INF/jspf/header.jspf"%>
 
   <div class="container-xxl py-5 px-4">
+    <h2 class="mb-4"><c:out value="${title}" /></h2>
+
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
       <c:forEach var="p" items="${productPage.content}">
         <div class="col">
