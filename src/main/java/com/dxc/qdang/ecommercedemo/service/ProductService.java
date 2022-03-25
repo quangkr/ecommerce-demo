@@ -25,6 +25,9 @@ public class ProductService {
     }
 
     public Page<Product> getProductsByCategory(String categoryName, Pageable pageable) {
+        if (categoryName == null) {
+            return productRepository.findAll(pageable);
+        }
         return productRepository.findByCategory(productCategoryRepository.findByName(categoryName), pageable);
     }
 

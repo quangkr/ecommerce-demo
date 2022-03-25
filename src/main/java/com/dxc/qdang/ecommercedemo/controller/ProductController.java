@@ -28,13 +28,15 @@ public class ProductController {
     @GetMapping("/product")
     public String showProductsByCategory(
             Model model,
-            @RequestParam("category") String categoryName,
-            @PageableDefault(size = 10, sort = "price", direction = Direction.DESC) Pageable pageable) {
+            @RequestParam(name = "category", required = false) String categoryName,
+            @PageableDefault(size = 10, sort = { "category", "price" }, direction = Direction.DESC) Pageable pageable) {
         Page<Product> productPage = productService.getProductsByCategory(categoryName, pageable);
 
-        model.addAttribute("categoryName", categoryName);
-        model.addAttribute("displayedCategoryName",
-                categoryName.substring(0, 1).toUpperCase() + categoryName.substring(1).toLowerCase());
+        if (categoryName != null) {
+            model.addAttribute("categoryName", categoryName);
+            model.addAttribute("displayedCategoryName",
+                    categoryName.substring(0, 1).toUpperCase() + categoryName.substring(1).toLowerCase());
+        }
         model.addAttribute("productPage", productPage);
 
         return "productlist";
