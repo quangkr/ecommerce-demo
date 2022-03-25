@@ -2,7 +2,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
-  <div class="container-xxl px-3">
+  <div class="container-xxl px-4">
     <my:link url="/" cssClass="navbar-brand logo-font">TechShop</my:link>
     <button
       class="navbar-toggler"
@@ -20,11 +20,11 @@
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-start flex-grow-1 ps-3 mb-2 mb-lg-0">
+        <ul class="navbar-nav justify-content-start flex-grow-1 ps-3 mb-2 mb-md-0">
           <li class="nav-item"><my:hlink cssClass="nav-link" url="/product?category=cellphone">Cellphone</my:hlink></li>
           <li class="nav-item"><my:hlink cssClass="nav-link" url="/product?category=laptop">Laptop</my:hlink></li>
         </ul>
-        <ul class="navbar-nav justify-content-end flex-grow-1 ps-3 mb-2 mb-lg-0">
+        <ul class="navbar-nav justify-content-end flex-grow-1 ps-3 mb-2 mb-md-0">
           <sec:authorize access="!isAuthenticated()">
             <li class="nav-item"><my:hlink cssClass="nav-link" url="/login">Login</my:hlink></li>
             <li class="nav-item"><my:hlink cssClass="nav-link" url="/signup">Sign up</my:hlink></li>

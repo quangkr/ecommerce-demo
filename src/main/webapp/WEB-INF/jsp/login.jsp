@@ -12,17 +12,19 @@
 
   <%@ include file="/WEB-INF/jspf/header.jspf"%>
 
-  <h1>Login page</h1>
+  <div class="container-xxl py-5 px-4">
+    <h1>Login page</h1>
 
-  <my:form url="/login" method="POST">
-    <div>
-      <label>Username <input type="text" name="username" /></label>
-    </div>
-    <div>
-      <label>Password <input type="password" name="password" /></label>
-    </div>
-    <button type="submit">Submit</button>
-  </my:form>
+    <my:form url="/login" method="POST">
+      <div>
+        <label>Username <input type="text" name="username" /></label>
+      </div>
+      <div>
+        <label>Password <input type="password" name="password" /></label>
+      </div>
+      <button type="submit">Submit</button>
+    </my:form>
+  </div>
 
 </body>
 </html>

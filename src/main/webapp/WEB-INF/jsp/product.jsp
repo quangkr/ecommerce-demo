@@ -13,44 +13,46 @@
 <body>
   <%@ include file="/WEB-INF/jspf/header.jspf"%>
 
-  <img src="${product.thumbnailUrl}" alt="${product.name} thumbnail" />
-  <h1>${product.name}</h1>
-  <ul>
-    <c:forEach var="description" items="${product.description}">
-      <li><c:out value="${description}" /></li>
-    </c:forEach>
-  </ul>
+  <div class="container-xxl py-5 px-4">
+    <img src="${product.thumbnailUrl}" alt="${product.name} thumbnail" />
+    <h1>${product.name}</h1>
+    <ul>
+      <c:forEach var="description" items="${product.description}">
+        <li><c:out value="${description}" /></li>
+      </c:forEach>
+    </ul>
 
-  <p>Brand: ${product.brand.name}</p>
-  <p>Category: ${product.category.name}</p>
+    <p>Brand: ${product.brand.name}</p>
+    <p>Category: ${product.category.name}</p>
 
-  <div class="add-to-cart-container" data-product-id="${product.id}">
-    <input type="text" name="quantity" value="1" required />
-    <button class="btn btn-primary">Add to cart</button>
-  </div>
-
-  <div class="toast-container position-fixed top-0 end-0 mt-5 p-3" role="alert" aria-live="polite" aria-atomic="true">
-    <div id="toast-add-success" class="toast align-items-center text-white bg-success border-0">
-      <div class="d-flex">
-        <div class="toast-body">Product added to cart successfully!</div>
-        <button
-          type="button"
-          class="btn-close btn-close-white me-2 m-auto"
-          data-bs-dismiss="toast"
-          aria-label="Close"
-        ></button>
-      </div>
+    <div class="add-to-cart-container" data-product-id="${product.id}">
+      <input type="text" name="quantity" value="1" required />
+      <button class="btn btn-primary">Add to cart</button>
     </div>
 
-    <div id="toast-add-failed" class="toast align-items-center text-white bg-danger border-0">
-      <div class="d-flex">
-        <div class="toast-body">Product added to cart unsuccessfully!</div>
-        <button
-          type="button"
-          class="btn-close btn-close-white me-2 m-auto"
-          data-bs-dismiss="toast"
-          aria-label="Close"
-        ></button>
+    <div class="toast-container position-fixed top-0 end-0 mt-5 p-3" role="alert" aria-live="polite" aria-atomic="true">
+      <div id="toast-add-success" class="toast align-items-center text-white bg-success border-0">
+        <div class="d-flex">
+          <div class="toast-body">Product added to cart successfully!</div>
+          <button
+            type="button"
+            class="btn-close btn-close-white me-2 m-auto"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
+      </div>
+
+      <div id="toast-add-failed" class="toast align-items-center text-white bg-danger border-0">
+        <div class="d-flex">
+          <div class="toast-body">Product added to cart unsuccessfully!</div>
+          <button
+            type="button"
+            class="btn-close btn-close-white me-2 m-auto"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
       </div>
     </div>
   </div>
