@@ -1,6 +1,7 @@
-document.addEventListener('DOMContentLoaded', () => {
-    initializeToasts();
+import { CONTEXT_ROOT } from './modules/constants.js';
+import { fetchHelper, isNum } from './modules/utils.js';
 
+document.addEventListener('DOMContentLoaded', () => {
     const inputGroups = document.querySelectorAll('.cart-item');
     Array.prototype.forEach.call(inputGroups, function (group) {
         group.querySelector('.input-quantity').addEventListener('change', handleChange);
@@ -14,7 +15,7 @@ async function handleRemove(e) {
     e.preventDefault();
     const productId = e.currentTarget.getAttribute('data-product-id');
 
-    const res = await fetchHelper(`${APP_CONSTANTS.contextRoot}/cart/`, {
+    const res = await fetchHelper(`${CONTEXT_ROOT}/cart/`, {
         method: 'DELETE',
         body: JSON.stringify([productId]),
     });
@@ -32,7 +33,7 @@ async function handleChange(e) {
     disableControls(parent);
 
     if (isNum(quantity) && quantity > 0) {
-        var res = await fetchHelper(`${APP_CONSTANTS.contextRoot}/cart/`, {
+        var res = await fetchHelper(`${CONTEXT_ROOT}/cart/`, {
             method: 'PUT',
             body: JSON.stringify({
                 productId,

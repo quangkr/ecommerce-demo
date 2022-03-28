@@ -7,7 +7,7 @@
   <title><c:out value="${product.name}" /> | Ecommerce demo</title>
   <%@ include file="/WEB-INF/jspf/meta.jspf"%>
 
-  <script src="${root}/js/product.js" defer></script>
+  <script src="${root}/js/product.js" type="module"></script>
 </head>
 
 <body>

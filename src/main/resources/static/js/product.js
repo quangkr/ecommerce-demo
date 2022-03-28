@@ -1,3 +1,6 @@
+import { CONTEXT_ROOT } from './modules/constants.js';
+import { fetchHelper, initializeToasts } from './modules/utils.js';
+
 document.addEventListener('DOMContentLoaded', () => {
     initializeToasts();
 
@@ -24,7 +27,7 @@ async function handleAddToCart(e) {
     button.setAttribute('aria-disabled', true);
     button.setAttribute('tabindex', -1);
 
-    const res = await fetchHelper(`${APP_CONSTANTS.contextRoot}/cart/`, {
+    const res = await fetchHelper(`${CONTEXT_ROOT}/cart/`, {
         method: 'POST',
         body: JSON.stringify({
             productId,

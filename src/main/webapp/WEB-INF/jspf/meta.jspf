@@ -3,9 +3,9 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-<sec:csrfMetaTags />
-
 <c:set var="root" value="${pageContext.servletContext.contextPath}"/>
+<sec:csrfMetaTags />
+<meta name="_context_root" content="${root}" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,13 +31,3 @@
   crossorigin="anonymous"
   defer
 ></script>
-
-<script>
-const APP_CONSTANTS = {
-    contextRoot: '${root}',
-    csrfParameter: document.querySelector('meta[name="_csrf_parameter"]').getAttribute('content'),
-    csrfHeader: document.querySelector('meta[name="_csrf_header"]').getAttribute('content'),
-    csrfToken: document.querySelector('meta[name="_csrf"]').getAttribute('content'),
-};
-</script>
-<script src="${root}/js/main.js" defer></script>

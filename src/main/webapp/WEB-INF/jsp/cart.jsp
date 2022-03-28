@@ -9,7 +9,7 @@
   <title>Cart | Ecommerce demo</title>
   <%@ include file="/WEB-INF/jspf/meta.jspf"%>
 
-  <script src="${root}/js/cart.js" defer></script>
+  <script src="${root}/js/cart.js" type="module"></script>
 </head>
 
 <body>
