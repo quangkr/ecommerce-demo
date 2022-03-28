@@ -16,6 +16,10 @@ async function fetchHelper(url, { method, body }) {
     return res;
 }
 
+function isNum(n) {
+    return !isNaN(n) && !isNaN(parseFloat(n));
+}
+
 function initializeToasts() {
     const toastNodeList = document.querySelectorAll('.toast');
     Array.prototype.forEach.call(toastNodeList, function (e) {

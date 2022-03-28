@@ -3,16 +3,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const inputGroups = document.querySelectorAll('.cart-item');
     Array.prototype.forEach.call(inputGroups, function (group) {
-        group.querySelector('input').addEventListener('change', handleChange);
-        group.querySelector('.btn-substract').addEventListener('click', handleSubstract);
-        group.querySelector('.btn-add').addEventListener('click', handleAdd);
+        group.querySelector('.input-quantity').addEventListener('change', handleChange);
+        group.querySelector('.btn-decrease').addEventListener('click', handleDecrease);
+        group.querySelector('.btn-increase').addEventListener('click', handleIncrease);
         group.querySelector('.btn-remove').addEventListener('click', handleRemove);
     });
 });
 
 async function handleRemove(e) {
     e.preventDefault();
-    const productId = getProductId(e.target);
+    const productId = e.currentTarget.getAttribute('data-product-id');
 
     const res = await fetchHelper(`${APP_CONSTANTS.contextRoot}/cart/`, {
         method: 'DELETE',
@@ -24,76 +24,59 @@ async function handleRemove(e) {
 
 async function handleChange(e) {
     e.preventDefault();
-    const input = e.target;
-    const substractBtn = e.target.parentElement.querySelector('.btn-substract');
-    const addBtn = e.target.parentElement.querySelector('.btn-add');
+    const productId = e.target.getAttribute('data-product-id');
+    const parent = e.target.parentElement;
+    const oldQuantity = e.target.getAttribute('data-quantity');
+    const quantity = e.target.value;
 
-    disableControls([substractBtn, addBtn, input]);
-    const res = await updateCart(input);
-    enableControls([substractBtn, addBtn, input]);
+    disableControls(parent);
+
+    if (isNum(quantity) && quantity > 0) {
+        var res = await fetchHelper(`${APP_CONSTANTS.contextRoot}/cart/`, {
+            method: 'PUT',
+            body: JSON.stringify({
+                productId,
+                quantity,
+            }),
+        });
+    }
+
+    if (!res || !res.ok) {
+        e.target.value = oldQuantity;
+    } else {
+        e.target.setAttribute('data-quantity', quantity);
+    }
+
+    enableControls(parent);
 }
 
-async function handleAdd(e) {
-    e.preventDefault();
-    const input = e.target.parentElement.querySelector('input');
-    const substractBtn = e.target.parentElement.querySelector('.btn-substract');
-    const addBtn = e.target;
+async function handleIncrease(e) {
+    const parent = e.target.parentElement;
+    const input = parent.querySelector('input');
+
     input.value++;
-
-    disableControls([substractBtn, addBtn, input]);
-    const res = await updateCart(input);
-    enableControls([substractBtn, addBtn, input]);
+    input.dispatchEvent(new Event('change'));
 }
 
-async function handleSubstract(e) {
-    e.preventDefault();
-    const input = e.target.parentElement.querySelector('input');
+async function handleDecrease(e) {
+    const parent = e.target.parentElement;
+    const input = parent.querySelector('input');
     if (input.value <= 1) {
         return;
     }
 
-    const substractBtn = e.target;
-    const addBtn = e.target.parentElement.querySelector('.btn-add');
     input.value--;
-
-    disableControls([substractBtn, addBtn, input]);
-    const res = await updateCart(input);
-    enableControls([substractBtn, addBtn, input]);
+    input.dispatchEvent(new Event('change'));
 }
 
-function disableControls(controls) {
-    controls.forEach((c) => {
+function disableControls(parent) {
+    parent.querySelectorAll('input,button').forEach((c) => {
         c.toggleAttribute('disabled', true);
     });
 }
 
-function enableControls(controls) {
-    controls.forEach((c) => {
+function enableControls(parent) {
+    parent.querySelectorAll('input,button').forEach((c) => {
         c.toggleAttribute('disabled', false);
     });
-}
-
-function getProductId(e) {
-    const attrName = 'data-product-id';
-    let result = e;
-    while (!result.hasAttribute(attrName)) {
-        result = result.parentNode;
-    }
-
-    return result.getAttribute(attrName);
-}
-
-async function updateCart(input) {
-    const productId = getProductId(input);
-    const quantity = input.value;
-
-    const res = await fetchHelper(`${APP_CONSTANTS.contextRoot}/cart/`, {
-        method: 'PUT',
-        body: JSON.stringify({
-            productId,
-            quantity,
-        }),
-    });
-
-    return res;
 }

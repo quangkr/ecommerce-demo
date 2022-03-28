@@ -13,7 +13,7 @@
 <c:url var="encUrl" value="${url}" />
 <c:url var="encImgSrc" value="${imgSrc}" />
 
-<div class="row py-3 cart-item border-bottom" data-product-id="${id}">
+<div class="row py-3 cart-item border-bottom">
   <div class="col-3 col-md-2 row gx-1 justify-content-center pt-3">
     <a class="col-12 col-md-6" href="${encUrl}">
       <img src="${encImgSrc}" class="w-100" alt="${name}'s thumbnail">
@@ -25,12 +25,20 @@
     <div class="col-9 col-md-3">
       <div class="row flex-nowrap">
         <div class="col input-group input-group-sm w-auto">
-          <button class="btn btn-secondary btn-substract" type="button">-</button>
-          <input type="text" class="form-control text-center input-quantity" name="quantity" value="${quantity}" required />
-          <button class="btn btn-secondary btn-add" type="button">+</button>
+          <button class="btn btn-secondary btn-decrease" type="button">-</button>
+          <input
+            type="text"
+            class="form-control text-center input-quantity"
+            name="quantity"
+            value="${quantity}"
+            data-quantity="${quantity}"
+            data-product-id="${id}"
+            required
+          />
+          <button class="btn btn-secondary btn-increase" type="button">+</button>
         </div>
         <div class="col p-0 flex-grow-0" >
-          <button class="btn btn-sm m-0 btn-danger btn-remove"><i class="bi bi-trash3"></i></button>
+          <button class="btn btn-sm m-0 btn-danger btn-remove" data-product-id="${id}"><i class="bi bi-trash3"></i></button>
         </div>
       </div>
     </div>
