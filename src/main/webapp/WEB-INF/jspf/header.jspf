@@ -14,7 +14,7 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="navbarMainContent" aria-labelledby="navbarLabel">
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarMainContent" aria-labelledby="navbarLabel">
       <div class="offcanvas-header">
         <my:link cssClass="navbar-brand logo-font" id="navbarLabel" url="/">TechShop</my:link>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
