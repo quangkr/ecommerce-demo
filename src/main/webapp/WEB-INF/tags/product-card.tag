@@ -14,19 +14,19 @@
 
 <div class="card h-100">
   <a href="${encUrl}">
-    <img src="${encImgSrc}" class="card-img-top" alt="...">
+    <img src="${encImgSrc}" class="card-img-top" alt="${name}'s thumbnail">
   </a>
   <div class="card-body">
     <a class="d-block text-decoration-none text-dark" href="${encUrl}">
-      <p class="card-text"><c:out value="${name}" /></p>
-      <h5 class="card-title"><fmt:formatNumber type="Number" value="${price}" /> đ</h5>
+      <h5 class="card-text fs-6 fw-normal"><c:out value="${name}" /></h5>
+      <div class="card-title fs-5" style="font-weight: 600"><fmt:formatNumber type="number" value="${price}" /> đ</div>
     </a>
-    <p class="card-text">
+    <div class="card-text">
       <ul>
         <c:forEach var="d" items="${description}">
           <li><c:out value="${d}" /></li>
         </c:forEach>
       </ul>
-    </p>
+    </div>
   </div>
 </div>
