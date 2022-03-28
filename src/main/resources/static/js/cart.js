@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     initializeToasts();
 
-    const inputGroups = document.querySelectorAll('.cart-row');
+    const inputGroups = document.querySelectorAll('.cart-item');
     Array.prototype.forEach.call(inputGroups, function (group) {
         group.querySelector('input').addEventListener('change', handleChange);
         group.querySelector('.btn-substract').addEventListener('click', handleSubstract);
