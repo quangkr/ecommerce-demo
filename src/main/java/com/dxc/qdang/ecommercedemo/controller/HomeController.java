@@ -22,7 +22,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String showHomePage(Model model) {
-        Pageable pageable = PageRequest.of(0, 5, Sort.by("price").descending());
+        Pageable pageable = PageRequest.of(0, 4, Sort.by("price").descending());
         Page<Product> cellphones = productService.getProductsByCategory(Optional.of("cellphone"), pageable);
         Page<Product> laptops = productService.getProductsByCategory(Optional.of("laptop"), pageable);
 

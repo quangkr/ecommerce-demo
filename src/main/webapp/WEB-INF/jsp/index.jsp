@@ -19,7 +19,7 @@
 
     <section>
       <h2 class="mb-3 mt-5">Top Cellphones</h2>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
         <c:forEach var="p" items="${cellphones}">
           <div class="col">
             <my:product-card
@@ -36,7 +36,7 @@
 
     <section>
       <h2 class="mb-3 mt-5">Top Laptops</h2>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
         <c:forEach var="p" items="${laptops}">
           <div class="col">
             <my:product-card
