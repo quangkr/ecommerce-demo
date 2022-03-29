@@ -13,6 +13,7 @@
 <body>
   <%@ include file="/WEB-INF/jspf/header.jspf"%>
   <%@ include file="/WEB-INF/jspf/toasts.jspf"%>
+  <%@ include file="/WEB-INF/jspf/loading-modal.jspf"%>
 
   <div class="container-xxl py-5 px-4">
     <div class="row">
@@ -30,10 +31,24 @@
         <p>Brand: ${product.brand.name}</p>
         <p>Category: ${product.category.name}</p>
 
-        <div class="add-to-cart-container" data-product-id="${product.id}">
-          <input type="text" name="quantity" value="1" required />
-          <button class="btn btn-primary">Add to cart</button>
+        <div class="row flex-nowrap ps-1 ps-md-0 pe-5 add-to-cart-container">
+          <div class="col col-md-5 input-group input-group-sm w-auto">
+            <button class="btn btn-secondary btn-decrease" type="button">-</button>
+            <input
+              type="text"
+              class="form-control text-center input-quantity"
+              name="quantity"
+              value="1"
+              data-quantity="1"
+              required
+            />
+            <button class="btn btn-secondary btn-increase" type="button">+</button>
+          </div>
+          <div class="col col-md-7 p-0" >
+            <button class="btn btn-primary px-4 py-2 btn-add-to-cart" data-product-id="${product.id}">Add to cart</button>
+          </div>
         </div>
+
       </div>
     </div>
   </div>
