@@ -1,15 +1,6 @@
 import { CONTEXT_ROOT } from './modules/constants.js';
 import { fetchHelper, isNum } from './modules/utils.js';
-
-document.addEventListener('DOMContentLoaded', () => {
-    const inputGroups = document.querySelectorAll('.cart-item');
-    Array.prototype.forEach.call(inputGroups, function (group) {
-        group.querySelector('.input-quantity').addEventListener('change', handleChange);
-        group.querySelector('.btn-decrease').addEventListener('click', handleDecrease);
-        group.querySelector('.btn-increase').addEventListener('click', handleIncrease);
-        group.querySelector('.btn-remove').addEventListener('click', handleRemove);
-    });
-});
+import { loadingModal, hasShown } from './modules/loadingModal.js';
 
 async function handleRemove(e) {
     e.preventDefault();
@@ -30,7 +21,8 @@ async function handleChange(e) {
     const oldQuantity = e.target.getAttribute('data-quantity');
     const quantity = e.target.value;
 
-    disableControls(parent);
+    loadingModal.show();
+    const shown = hasShown();
 
     if (isNum(quantity) && quantity > 0) {
         var res = await fetchHelper(`${CONTEXT_ROOT}/cart/`, {
@@ -48,7 +40,10 @@ async function handleChange(e) {
         e.target.setAttribute('data-quantity', quantity);
     }
 
-    enableControls(parent);
+    loadingModal.hide();
+    shown.then(() => {
+        loadingModal.hide();
+    });
 }
 
 async function handleIncrease(e) {
@@ -70,14 +65,12 @@ async function handleDecrease(e) {
     input.dispatchEvent(new Event('change'));
 }
 
-function disableControls(parent) {
-    parent.querySelectorAll('input,button').forEach((c) => {
-        c.toggleAttribute('disabled', true);
+document.addEventListener('DOMContentLoaded', () => {
+    const inputGroups = document.querySelectorAll('.cart-item');
+    Array.prototype.forEach.call(inputGroups, function (group) {
+        group.querySelector('.input-quantity').addEventListener('change', handleChange);
+        group.querySelector('.btn-decrease').addEventListener('click', handleDecrease);
+        group.querySelector('.btn-increase').addEventListener('click', handleIncrease);
+        group.querySelector('.btn-remove').addEventListener('click', handleRemove);
     });
-}
-
-function enableControls(parent) {
-    parent.querySelectorAll('input,button').forEach((c) => {
-        c.toggleAttribute('disabled', false);
-    });
-}
+});

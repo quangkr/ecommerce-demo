@@ -8,6 +8,7 @@
 <head>
   <title>Cart | Ecommerce demo</title>
   <%@ include file="/WEB-INF/jspf/meta.jspf"%>
+  <%@ include file="/WEB-INF/jspf/loading-modal.jspf"%>
 
   <script src="${root}/js/cart.js" type="module"></script>
 </head>
