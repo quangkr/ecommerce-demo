@@ -22,6 +22,8 @@
   <properties>
     <java.version>1.8</java.version>
     <java.util.logging.manager>org.apache.logging.log4j.jul.LogManager</java.util.logging.manager>
+    <tomcat.version>9.0.52</tomcat.version>
+    <webapp-runner.version>9.0.52.1</webapp-runner.version>
   </properties>
 
   <dependencies>
@@ -121,10 +123,54 @@
           </excludes>
         </configuration>
       </plugin>
+      <plugin>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>com.heroku</groupId>
+                  <artifactId>webapp-runner</artifactId>
+                  <destFileName>webapp-runner.jar</destFileName>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>clean-jar-artifacts</id>
+            <phase>install</phase>
+            <goals><goal>clean</goal></goals>
+            <configuration>
+              <excludeDefaultDirectories>true</excludeDefaultDirectories>
+              <filesets>
+                <fileset>
+                  <directory>target</directory>
+                  <excludes>
+                    <exclude>dependency/*.jar</exclude>
+                    <exclude>*.war</exclude>
+                  </excludes>
+                </fileset>
+              </filesets>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
   <profiles>
+
     <profile>
       <id>dev</id>
       <properties>
@@ -134,12 +180,59 @@
         <activeByDefault>true</activeByDefault>
       </activation>
     </profile>
+
     <profile>
       <id>prod</id>
       <properties>
         <spring.profiles.active>prod</spring.profiles.active>
       </properties>
     </profile>
+
+    <profile>
+      <id>heroku</id>
+      <properties>
+        <spring.profiles.active>heroku</spring.profiles.active>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>com.heroku</groupId>
+          <artifactId>webapp-runner</artifactId>
+          <version>${webapp-runner.version}</version>
+          <scope>provided</scope>
+        </dependency>
+        <dependency>
+          <groupId>org.postgresql</groupId>
+          <artifactId>postgresql</artifactId>
+          <scope>runtime</scope>
+        </dependency>
+      </dependencies>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-clean-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>clean-jar-artifacts</id>
+                <phase>install</phase>
+                <goals><goal>clean</goal></goals>
+                <configuration>
+                  <excludeDefaultDirectories>true</excludeDefaultDirectories>
+                  <filesets>
+                    <fileset>
+                      <directory>target</directory>
+                      <excludes>
+                        <exclude>*.war</exclude>
+                      </excludes>
+                    </fileset>
+                  </filesets>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
   </profiles>
 
 </project>
