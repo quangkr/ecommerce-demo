@@ -1,12 +1,9 @@
 import { CONTEXT_ROOT } from './modules/constants.js';
-import { fetchHelper, initializeToasts } from './modules/utils.js';
+import { fetchHelper } from './modules/utils.js';
+import { showToast } from './modules/toasts.js';
 
-document.addEventListener('DOMContentLoaded', () => {
-    initializeToasts();
-
-    const addToCartButton = document.querySelector('.add-to-cart-container button');
-    addToCartButton.addEventListener('click', handleAddToCart);
-});
+const successMessage = 'Product successfully added!';
+const failedMessage = 'There was some error adding product!';
 
 async function handleAddToCart(e) {
     e.preventDefault();
@@ -17,8 +14,6 @@ async function handleAddToCart(e) {
 
     const parent = e.target.parentElement;
     const input = parent.querySelector('input');
-    const successToast = bootstrap.Toast.getInstance(document.getElementById('toast-add-success'));
-    const failedToast = bootstrap.Toast.getInstance(document.getElementById('toast-add-failed'));
 
     const productId = parent.getAttribute('data-product-id');
     const quantity = input.value ? input.value : 1;
@@ -40,8 +35,13 @@ async function handleAddToCart(e) {
     button.removeAttribute('tabindex');
 
     if (res.ok) {
-        successToast.show();
+        showToast(successMessage, 'success');
     } else {
-        failedToast.show();
+        showToast(failedMessage, 'danger');
     }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const addToCartButton = document.querySelector('.add-to-cart-container button');
+    addToCartButton.addEventListener('click', handleAddToCart);
+});

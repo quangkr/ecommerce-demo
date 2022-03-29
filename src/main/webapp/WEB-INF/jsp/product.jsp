@@ -12,6 +12,7 @@
 
 <body>
   <%@ include file="/WEB-INF/jspf/header.jspf"%>
+  <%@ include file="/WEB-INF/jspf/toasts.jspf"%>
 
   <div class="container-xxl py-5 px-4">
     <div class="row">
@@ -33,32 +34,6 @@
           <input type="text" name="quantity" value="1" required />
           <button class="btn btn-primary">Add to cart</button>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="toast-container position-fixed top-0 end-0 mt-5 p-3" role="alert" aria-live="polite" aria-atomic="true">
-    <div id="toast-add-success" class="toast align-items-center text-white bg-success border-0">
-      <div class="d-flex">
-        <div class="toast-body">Product added to cart successfully!</div>
-        <button
-          type="button"
-          class="btn-close btn-close-white me-2 m-auto"
-          data-bs-dismiss="toast"
-          aria-label="Close"
-        ></button>
-      </div>
-    </div>
-
-    <div id="toast-add-failed" class="toast align-items-center text-white bg-danger border-0">
-      <div class="d-flex">
-        <div class="toast-body">Product added to cart unsuccessfully!</div>
-        <button
-          type="button"
-          class="btn-close btn-close-white me-2 m-auto"
-          data-bs-dismiss="toast"
-          aria-label="Close"
-        ></button>
       </div>
     </div>
   </div>

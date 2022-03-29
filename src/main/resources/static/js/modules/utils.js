@@ -21,10 +21,3 @@ export async function fetchHelper(url, { method, body }) {
 export function isNum(n) {
     return !isNaN(n) && !isNaN(parseFloat(n));
 }
-
-export function initializeToasts() {
-    const toastNodeList = document.querySelectorAll('.toast');
-    Array.prototype.forEach.call(toastNodeList, function (e) {
-        new bootstrap.Toast(e);
-    });
-}
