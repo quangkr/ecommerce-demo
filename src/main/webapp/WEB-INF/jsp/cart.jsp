@@ -37,7 +37,7 @@
         <span class="fw-bold"><fmt:formatNumber type="number" value="${cart.grandTotal}" /> đ</span>
       </div>
       <div class="col flex-grow-0">
-        <my:link url="/cart/checkout" cssClass="btn btn-primary">Checkout</my:link>
+        <my:link url="/checkout" cssClass="btn btn-primary">Checkout</my:link>
       </div>
     </div>
   </div>

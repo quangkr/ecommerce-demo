@@ -26,8 +26,8 @@
     </div>
 
     <div>
-      <a href="${root}/cart/checkout">Back</a>
-      <my:form url="/cart/checkoutConfirm" method="POST">
+      <my:link url="/checkout">Back</my:link>
+      <my:form url="/checkout/confirm" method="POST">
         <button type="submit">Checkout</button>
       </my:form>
     </div>

@@ -14,7 +14,7 @@
   <%@ include file="/WEB-INF/jspf/header.jspf"%>
 
   <div class="container-xxl py-5 px-4">
-    <c:url value="/cart/checkout" var="checkoutUrl" />
+    <c:url value="/checkout" var="checkoutUrl" />
     <form:form action="${checkoutUrl}" method="POST" modelAttribute="shippingDetail"
       cssClass="row g-3"
     >
