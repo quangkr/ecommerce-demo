@@ -1,4 +1,5 @@
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
@@ -20,16 +21,25 @@
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-start flex-grow-1 ps-3 mb-2 mb-md-0">
+        <ul class="navbar-nav align-items-center justify-content-start flex-grow-1 ps-3 mb-2 mb-md-0">
           <li class="nav-item"><my:hlink cssClass="nav-link" url="/products/cellphone">Cellphone</my:hlink></li>
           <li class="nav-item"><my:hlink cssClass="nav-link" url="/products/laptop">Laptop</my:hlink></li>
         </ul>
-        <ul class="navbar-nav justify-content-end flex-grow-1 ps-3 mb-2 mb-md-0">
+        <ul class="navbar-nav align-items-center justify-content-end flex-grow-1 ps-3 mb-2 mb-md-0">
           <sec:authorize access="!isAuthenticated()">
             <li class="nav-item"><my:hlink cssClass="nav-link" url="/login">Login</my:hlink></li>
             <li class="nav-item"><my:hlink cssClass="nav-link" url="/signup">Sign up</my:hlink></li>
           </sec:authorize>
           <sec:authorize access="isAuthenticated()">
+            <li class="nav-item me-2">
+              <my:hlink cssClass="nav-link position-relative" url="/cart">
+                <i class="bi bi-cart fs-4"></i>
+                <span
+                  id="navbar-cart-quantity"
+                  class="position-absolute mt-2 top-0 start-100 translate-middle badge rounded-pill bg-dark"
+                ><c:out value="${cart.totalQuantity}" /></span>
+              </my:hlink>
+            </li>
             <li class="nav-item dropdown">
               <my:link
                 cssClass="nav-link dropdown-toggle"
@@ -40,7 +50,6 @@
                 aria-expanded="false"
                 ><sec:authentication property="name" /></my:link>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li class="nav-item"><my:hlink cssClass="dropdown-item" url="/cart">Cart</my:hlink></li>
                 <li class="nav-item"><my:hlink cssClass="dropdown-item" url="/order">Order</my:hlink></li>
                 <li><hr class="dropdown-divider" /></li>
                 <li>

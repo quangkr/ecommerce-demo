@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.dxc.qdang.ecommercedemo.dto.ShippingDetailDto;
 import com.dxc.qdang.ecommercedemo.security.AppUserDetails;
@@ -31,20 +30,18 @@ public class CheckoutController {
     OrderService orderService;
 
     @GetMapping({ "", "/" })
-    public ModelAndView showCheckoutPage(@AuthenticationPrincipal AppUserDetails userDetails,
-            @ModelAttribute(name = "shippingDetail") ShippingDetailDto shippingDetail) {
-        return new ModelAndView("checkout", "cart", cartService.getCart(userDetails));
+    public String showCheckoutPage(@ModelAttribute(name = "shippingDetail") ShippingDetailDto shippingDetail) {
+        return "checkout";
     }
 
     @PostMapping({ "", "/" })
-    public ModelAndView confirmCheckout(@AuthenticationPrincipal AppUserDetails userDetails,
-            @ModelAttribute(name = "shippingDetail") @Valid ShippingDetailDto shippingDetail,
+    public String confirmCheckout(@ModelAttribute(name = "shippingDetail") @Valid ShippingDetailDto shippingDetail,
             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return new ModelAndView("checkout", "cart", cartService.getCart(userDetails));
+            return "checkout";
         }
 
-        return new ModelAndView("checkoutConfirm", "cart", cartService.getCart(userDetails));
+        return "checkoutConfirm";
     }
 
     @PostMapping("/confirm")

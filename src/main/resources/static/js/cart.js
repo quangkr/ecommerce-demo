@@ -34,10 +34,16 @@ async function handleChange(e) {
         });
     }
 
-    if (!res || !res.ok) {
-        e.target.value = oldQuantity;
-    } else {
+    if (res && res.ok) {
+        const json = await res.json();
+        const quantityBadge = document.getElementById('navbar-cart-quantity');
+        const grandTotalElement = document.getElementById('cart-grand-total');
+
+        quantityBadge.textContent = json.totalQuantity;
+        grandTotalElement.textContent = `${json.grandTotal.toLocaleString()} đ`;
         e.target.setAttribute('data-quantity', quantity);
+    } else {
+        e.target.value = oldQuantity;
     }
 
     loadingModal.hide();

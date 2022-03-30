@@ -39,7 +39,11 @@ async function handleAddToCart(e) {
     shown.then(() => {
         loadingModal.hide();
     });
-    if (res.ok) {
+
+    if (res && res.ok) {
+        const json = await res.json();
+        const quantityBadge = document.getElementById('navbar-cart-quantity');
+        quantityBadge.textContent = json.totalQuantity;
         showToast(successMessage, 'success');
     } else {
         showToast(failedMessage, 'danger');

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.dxc.qdang.ecommercedemo.dto.CartItemDto;
 import com.dxc.qdang.ecommercedemo.model.CartDetail;
@@ -27,8 +26,8 @@ public class CartController {
     CartService cartService;
 
     @GetMapping(path = { "", "/" })
-    public ModelAndView showCartPage(@AuthenticationPrincipal AppUserDetails userDetails) {
-        return new ModelAndView("cart", "cart", cartService.getCart(userDetails));
+    public String showCartPage(@AuthenticationPrincipal AppUserDetails userDetails) {
+        return "cart";
     }
 
     @PostMapping(path = { "", "/" })
