@@ -19,22 +19,22 @@ public class ShippingDetailDto implements Serializable {
 
     private static final long serialVersionUID = SerializableVersion.SERIAL_VERSION_UID;
 
-    @NotBlank(message = "Recipient name must not be blank")
+    @NotBlank(message = "Required")
     private String fullName;
 
-    @NotBlank(message = "Phone number must not be blank")
+    @NotBlank(message = "Required")
     private String phoneNumber;
 
-    @NotBlank(message = "Address must not be blank")
+    @NotBlank(message = "Required")
     private String address;
 
-    @NotBlank(message = "Ward must not be blank")
+    @NotBlank(message = "Required")
     private String ward;
 
-    @NotBlank(message = "District must not be blank")
+    @NotBlank(message = "Required")
     private String district;
 
-    @NotBlank(message = "City must not be blank")
+    @NotBlank(message = "Required")
     private String city;
 
 }

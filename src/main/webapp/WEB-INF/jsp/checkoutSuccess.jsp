@@ -12,10 +12,12 @@
 
   <%@ include file="/WEB-INF/jspf/header.jspf"%>
 
-  <div class="container-xxl py-5 px-4">
-    <p>Success! Your order is being processed</p>
+  <div class="container-xxl py-5 px-4 text-center">
+    <div class="mt-4 fs-4">Success! Your order is being processed</div>
 
-    <my:link url="/">Continue shopping</my:link>
+    <div class="mt-3">
+      <my:link url="/" cssClass="btn btn-secondary btn-lg">Continue shopping</my:link>
+    </div>
   </div>
 
 </body>
