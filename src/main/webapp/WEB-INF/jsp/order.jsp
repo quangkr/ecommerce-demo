@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 
@@ -12,36 +13,40 @@
 
   <%@ include file="/WEB-INF/jspf/header.jspf"%>
 
-  <div class="container-xxl py-5 px-4">
-    <c:forEach var="o" varStatus="oStatus" items="${orders}">
-      <h2>Order <c:out value="#${oStatus.count} (${o.createdAt})"/></h2>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">No.
-            <th scope="col">Name
-            <th scope="col">Quantity
-            <th scope="col">Price
-          </tr>
-        </thead>
-        <tbody>
-          <c:forEach var="i" varStatus="iStatus" items="${o.orderItems}">
-            <tr>
-              <th scope="row"><c:out value="${iStatus.count}" />
-              <td><c:out value="${i.product.name}" />
-              <td><c:out value="${i.quantity}" />
-              <td><c:out value="${i.quantity * i.product.price}" />
-            </tr>
-          </c:forEach>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td colspan="3">Grand total:
-            <td><c:out value="${o.grandTotal}" />
-          </tr>
-        </tfoot>
-      </table>
-    </c:forEach>
+  <div class="bg-light">
+    <div class="container-xxl py-5 px-0 px-md-4">
+      <c:forEach var="o" varStatus="s" items="${orders}">
+        <div class="mb-2 mb-md-5 px-3 pb-4 bg-white">
+          <div class="d-flex flex-column py-4 border-bottom">
+            <h2 class="fs-4">
+              <c:set var="formattedDate"><fmt:formatDate pattern="dd-MM-yyyy" value="${o.createdAt}"/></c:set>
+              <c:out value="#${s.count}: Ordered on ${formattedDate}"/>
+            </h2>
+          </div>
+          <div class="d-flex flex-column">
+            <c:forEach var="i" items="${o.orderItems}">
+              <div>
+                <my:checkout-item
+                  name="${i.product.name}"
+                  url="/product/${i.product.id}"
+                  imgSrc="${i.product.thumbnailUrl}"
+                  price="${i.product.price}"
+                  quantity="${i.quantity}"
+                />
+              </div>
+            </c:forEach>
+          </div>
+          <div class="d-flex flex-column">
+            <div class="pt-3 d-flex justify-content-end">
+              <span>
+                Total:
+                <span class="fw-bold"><fmt:formatNumber type="number" value="${o.grandTotal}" /> đ</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </c:forEach>
+    </div>
   </div>
 
 </body>

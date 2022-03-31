@@ -12,13 +12,13 @@
 <c:url var="encUrl" value="${url}" />
 <c:url var="encImgSrc" value="${imgSrc}" />
 
-<div class="row py-3 checkout-item border-bottom">
+<div class="row mx-1 py-3 checkout-item border-bottom">
   <div class="col-3 col-md-2 row gx-1 justify-content-center pt-3">
     <a class="col-12 col-md-6" href="${encUrl}">
       <img src="${encImgSrc}" class="w-100" alt="${name}'s thumbnail">
     </a>
   </div>
-  <div class="col-9 col-md-10 row gy-2 justify-content-end text-end">
+  <div class="col row gy-2 justify-content-end text-end">
     <h5 class="col-12 col-md-5 fs-6 text-md-start"><c:out value="${name}" /></h5>
     <div class="col-12 col-md"><fmt:formatNumber type="number" value="${price}" /> đ</div>
     <div class="col-12 col-md-auto">x <fmt:formatNumber type="number" value="${quantity}" /></div>

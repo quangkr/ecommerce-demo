@@ -3,6 +3,7 @@ package com.dxc.qdang.ecommercedemo.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,7 +31,7 @@ public class OrderService {
         AppUser user = new AppUser();
         user.setId(userDetails.getUserId());
 
-        return orderRepository.findAllByUser(user);
+        return orderRepository.findAllByUser(Sort.by("createdAt").descending(), user);
     }
 
     public OrderDetail addOrder(AppUserDetails userDetails, ShippingDetailDto shippingDetailDto) {
