@@ -13,8 +13,8 @@
 <c:url var="encImgSrc" value="${imgSrc}" />
 
 <div class="card h-100">
-  <a href="${encUrl}">
-    <img src="${encImgSrc}" class="card-img-top" alt="${name}'s thumbnail">
+  <a href="${encUrl}" class="d-flex justify-content-center p-2">
+    <img src="${encImgSrc}" class="card-img-top" alt="${name}'s thumbnail" style="max-height: 12rem; object-fit: contain" />
   </a>
   <div class="card-body">
     <a class="d-block text-decoration-none text-dark" href="${encUrl}">
