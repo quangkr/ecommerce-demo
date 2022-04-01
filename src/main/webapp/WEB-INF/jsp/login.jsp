@@ -20,12 +20,25 @@
 
         <my:form url="/login" method="POST" cssClass="my-3">
           <div class="form-floating mb-3">
-            <input id="form-username" class="form-control" type="text" name="username" placeholder="Email" />
+            <input
+              id="form-username"
+              class="form-control ${param.error != null ? 'is-invalid' : '' }"
+              type="text"
+              name="username"
+              placeholder="Email"
+            />
             <label for="form-username" class="form-label">Email</label>
           </div>
           <div class="form-floating mb-3">
-            <input id="form-password" class="form-control" type="password" name="password" placeholder="Password" />
+            <input
+              id="form-password"
+              class="form-control ${param.error != null ? 'is-invalid' : '' }"
+              type="password"
+              name="password"
+              placeholder="Password"
+            />
             <label for="form-password" class="form-label">Password</label>
+            <div class="mb-3 invalid-feedback">Invalid username or password</div>
           </div>
           <div class="mt-3 d-flex justify-content-between">
             <label class="form-check-label">
