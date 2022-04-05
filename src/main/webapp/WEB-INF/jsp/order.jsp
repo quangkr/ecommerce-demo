@@ -13,8 +13,11 @@
 
   <%@ include file="/WEB-INF/jspf/header.jspf"%>
 
-  <div class="bg-light">
+  <div class="bg-light" style="min-height: calc(100vh - 3rem)">
     <div class="container-xxl py-5 px-0 px-md-4">
+      <c:if test="${empty orders}">
+        <div class="mt-4 text-center fs-4">You have no orders!</div>
+      </c:if>
       <c:forEach var="o" varStatus="s" items="${orders}">
         <div class="mb-2 mb-md-5 px-3 pb-4 bg-white">
           <div class="d-flex flex-column py-4 border-bottom">
