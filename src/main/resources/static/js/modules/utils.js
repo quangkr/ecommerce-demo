@@ -1,7 +1,7 @@
 import { CSRF_HEADER, CSRF_TOKEN } from './constants.js';
 
-export async function fetchHelper(url, { method, body }) {
-    const res = await fetch(url, {
+export function fetchHelper(url, { method, body }) {
+    return fetch(url, {
         method,
         body,
         headers: {
@@ -9,13 +9,6 @@ export async function fetchHelper(url, { method, body }) {
             [CSRF_HEADER]: CSRF_TOKEN,
         },
     });
-
-    if (res.redirected) {
-        window.location.replace(res.url);
-        return;
-    }
-
-    return res;
 }
 
 export function isNum(n) {

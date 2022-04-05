@@ -40,29 +40,31 @@ async function handleAddToCart(e) {
         loadingModal.hide();
     });
 
-    if (res && res.ok) {
+    if (!res || !res.ok) {
+        showToast(failedMessage, 'danger');
+    } else if (res.redirected) {
+        window.location.replace(res.url);
+    } else {
         const json = await res.json();
         const quantityBadge = document.getElementById('navbar-cart-quantity');
         quantityBadge.textContent = json.totalQuantity;
         showToast(successMessage, 'success');
-    } else {
-        showToast(failedMessage, 'danger');
     }
 }
 
-async function handleIncrease(e) {
+function handleIncrease(e) {
     const input = e.target.parentElement.querySelector('input');
     input.value++;
     input.dispatchEvent(new Event('change'));
 }
 
-async function handleDecrease(e) {
+function handleDecrease(e) {
     const input = e.target.parentElement.querySelector('input');
     input.value--;
     input.dispatchEvent(new Event('change'));
 }
 
-async function handleChange(e) {
+function handleChange(e) {
     if (isNum(e.target.value) && e.target.value > 0) {
         e.target.setAttribute('data-quantity', e.target.value);
     } else {

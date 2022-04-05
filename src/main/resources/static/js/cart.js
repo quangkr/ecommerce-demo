@@ -34,7 +34,9 @@ async function handleChange(e) {
         });
     }
 
-    if (res && res.ok) {
+    if (!res || !res.ok) {
+        e.target.value = oldQuantity;
+    } else {
         const json = await res.json();
         const quantityBadge = document.getElementById('navbar-cart-quantity');
         const grandTotalElement = document.getElementById('cart-grand-total');
@@ -42,8 +44,6 @@ async function handleChange(e) {
         quantityBadge.textContent = json.totalQuantity;
         grandTotalElement.textContent = `${json.grandTotal.toLocaleString()} đ`;
         e.target.setAttribute('data-quantity', quantity);
-    } else {
-        e.target.value = oldQuantity;
     }
 
     loadingModal.hide();
@@ -52,7 +52,7 @@ async function handleChange(e) {
     });
 }
 
-async function handleIncrease(e) {
+function handleIncrease(e) {
     const parent = e.target.parentElement;
     const input = parent.querySelector('input');
 
@@ -60,7 +60,7 @@ async function handleIncrease(e) {
     input.dispatchEvent(new Event('change'));
 }
 
-async function handleDecrease(e) {
+function handleDecrease(e) {
     const parent = e.target.parentElement;
     const input = parent.querySelector('input');
     if (input.value <= 1) {
