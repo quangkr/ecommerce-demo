@@ -1,7 +1,7 @@
 import { CONTEXT_ROOT } from './modules/constants.js';
 import { fetchHelper, isNum } from './modules/utils.js';
 import { showToast } from './modules/toasts.js';
-import { loadingModal, hasShown } from './modules/loadingModal.js';
+import { loadingModal, asyncShow } from './modules/loadingModal.js';
 
 const successMessage = 'Product successfully added!';
 const failedMessage = 'There was some error adding product!';
@@ -17,11 +17,10 @@ async function handleAddToCart(e) {
     const productId = button.getAttribute('data-product-id');
     const quantity = input.value;
 
+    const shown = asyncShow();
     button.classList.add('disabled');
     button.setAttribute('aria-disabled', true);
     button.setAttribute('tabindex', -1);
-    loadingModal.show();
-    const shown = hasShown();
 
     const res = await fetchHelper(`${CONTEXT_ROOT}/cart/`, {
         method: 'POST',
@@ -34,11 +33,8 @@ async function handleAddToCart(e) {
     button.classList.remove('disabled');
     button.removeAttribute('aria-disabled');
     button.removeAttribute('tabindex');
-
+    await shown;
     loadingModal.hide();
-    shown.then(() => {
-        loadingModal.hide();
-    });
 
     if (!res || !res.ok) {
         showToast(failedMessage, 'danger');

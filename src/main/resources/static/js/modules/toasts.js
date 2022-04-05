@@ -29,19 +29,23 @@ export function showToast(message, type = 'primary') {
 export function hideToast(type = 'primary') {
     getInstance(type).hide();
 }
-export async function hasShown(type = 'primary') {
-    return new Promise((resolve) => {
+export async function asyncShow(message, type = 'primary') {
+    const promise = new Promise((resolve) => {
         function shown() {
             resolve();
         }
         getInstance(type).addEventListener('shown.bs.toast', shown, { once: true });
     });
+    showToast(message, type);
+    return promise;
 }
-export async function hasHidden(type = 'primary') {
-    return new Promise((resolve) => {
+export async function asyncHide(type = 'primary') {
+    const promise = new Promise((resolve) => {
         function hidden() {
             resolve();
         }
         getInstance(type).addEventListener('hidden.bs.toast', hidden, { once: true });
     });
+    hideToast(type);
+    return promise;
 }

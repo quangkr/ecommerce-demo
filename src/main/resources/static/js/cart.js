@@ -1,6 +1,6 @@
 import { CONTEXT_ROOT } from './modules/constants.js';
 import { fetchHelper, isNum } from './modules/utils.js';
-import { loadingModal, hasShown } from './modules/loadingModal.js';
+import { loadingModal, asyncShow } from './modules/loadingModal.js';
 
 async function handleRemove(e) {
     e.preventDefault();
@@ -21,10 +21,9 @@ async function handleChange(e) {
     const oldQuantity = e.target.getAttribute('data-quantity');
     const quantity = e.target.value;
 
-    loadingModal.show();
-    const shown = hasShown();
-
     if (isNum(quantity) && quantity > 0) {
+        const shown = asyncShow();
+
         var res = await fetchHelper(`${CONTEXT_ROOT}/cart/`, {
             method: 'PUT',
             body: JSON.stringify({
@@ -32,6 +31,9 @@ async function handleChange(e) {
                 quantity,
             }),
         });
+
+        await shown;
+        loadingModal.hide();
     }
 
     if (!res || !res.ok) {
@@ -45,11 +47,6 @@ async function handleChange(e) {
         grandTotalElement.textContent = `${json.grandTotal.toLocaleString()} đ`;
         e.target.setAttribute('data-quantity', quantity);
     }
-
-    loadingModal.hide();
-    shown.then(() => {
-        loadingModal.hide();
-    });
 }
 
 function handleIncrease(e) {
