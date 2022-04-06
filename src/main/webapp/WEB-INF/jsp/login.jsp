@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
@@ -26,6 +27,7 @@
               type="text"
               name="username"
               placeholder="Email"
+              value="${username}"
             />
             <label for="form-username" class="form-label">Email</label>
           </div>
@@ -42,7 +44,12 @@
           </div>
           <div class="mt-3 d-flex justify-content-between">
             <label class="form-check-label">
-              <input class="form-check-input" type="checkbox" name="remember-me" />
+              <input
+                class="form-check-input"
+                type="checkbox"
+                name="remember-me"
+                <c:if test="${rememberMe}">checked</c:if>
+              />
               Remember me
             </label>
             <button class="btn btn-primary" type="submit">Submit</button>
