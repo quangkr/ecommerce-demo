@@ -1,7 +1,5 @@
 package com.dxc.qdang.ecommercedemo.controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,8 +21,8 @@ public class HomeController {
     @RequestMapping("/")
     public String showHomePage(Model model) {
         Pageable pageable = PageRequest.of(0, 4, Sort.by("price").descending());
-        Page<Product> cellphones = productService.getProductsByCategory(Optional.of("cellphone"), pageable);
-        Page<Product> laptops = productService.getProductsByCategory(Optional.of("laptop"), pageable);
+        Page<Product> cellphones = productService.getProductsByCategory("cellphone", pageable);
+        Page<Product> laptops = productService.getProductsByCategory("laptop", pageable);
 
         model.addAttribute("cellphones", cellphones.getContent());
         model.addAttribute("laptops", laptops.getContent());
