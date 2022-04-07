@@ -41,7 +41,7 @@ public class AppUserDetails implements UserDetails {
         this.enabled = user.isEnabled();
 
         Set<SimpleGrantedAuthority> roles = new HashSet<>();
-        roles.add(new SimpleGrantedAuthority("ROLE_" + user.getAuthority().getName()));
+        roles.add(new SimpleGrantedAuthority("ROLE_" + user.getAuthority().getName().toUpperCase()));
         this.authorities = roles;
     }
 
