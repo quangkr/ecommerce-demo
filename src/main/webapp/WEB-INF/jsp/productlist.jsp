@@ -31,7 +31,7 @@
 
     <div class="mt-4">
       <my:pagination
-        url="/product/${categoryName}"
+        url="/products/${categoryName}"
         total="${productPage.totalPages}"
         current="${productPage.number + 1}"
       ></my:pagination>
