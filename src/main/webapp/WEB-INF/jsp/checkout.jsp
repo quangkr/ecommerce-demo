@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 
@@ -24,82 +23,76 @@
           cssClass="row g-3"
         >
           <div class="form-floating col-12">
-            <spring:bind path="fullName">
-              <form:input
-                path="fullName"
-                id="form-full-name"
-                cssClass="form-control ${status.error ? 'is-invalid' : ''}"
-                type="text"
-                placeholder="Recipient"
-              />
-              <label for="form-full-name" class="form-label">Recipient</label>
-              <form:errors path="fullName" cssClass="invalid-feedback" element="div" />
-            </spring:bind>
+            <form:input
+              path="fullName"
+              id="form-full-name"
+              cssClass="form-control"
+              cssErrorClass="form-control is-invalid"
+              type="text"
+              placeholder="Recipient"
+            />
+            <form:label path="fullName" for="form-full-name" cssClass="form-label">Recipient</form:label>
+            <form:errors path="fullName" cssClass="invalid-feedback" element="div" />
           </div>
           <div class="form-floating col-12">
-            <spring:bind path="phoneNumber">
-              <form:input
-                path="phoneNumber"
-                id="form-phone-number"
-                cssClass="form-control ${status.error ? 'is-invalid' : ''}"
-                type="text"
-                placeholder="Phone number"
-              />
-              <label for="form-phone-number" class="form-label">Phone number</label>
-              <form:errors path="phoneNumber" cssClass="invalid-feedback" element="div" />
-            </spring:bind>
+            <form:input
+              path="phoneNumber"
+              id="form-phone-number"
+              cssClass="form-control"
+              cssErrorClass="form-control is-invalid"
+              type="text"
+              placeholder="Phone number"
+            />
+            <form:label path="phoneNumber" for="form-phone-number" cssClass="form-label">Phone number</form:label>
+            <form:errors path="phoneNumber" cssClass="invalid-feedback" element="div" />
           </div>
           <div class="form-floating col-12">
-            <spring:bind path="address">
-              <form:input
-                path="address"
-                id="form-address"
-                cssClass="form-control ${status.error ? 'is-invalid' : ''}"
-                type="text"
-                placeholder="Address"
-              />
-              <label for="form-address" class="form-label">Address</label>
-              <form:errors path="address" cssClass="invalid-feedback" element="div" />
-            </spring:bind>
+            <form:input
+              path="address"
+              id="form-address"
+              cssClass="form-control"
+              cssErrorClass="form-control is-invalid"
+              type="text"
+              placeholder="Address"
+            />
+            <form:label path="address" for="form-address" cssClass="form-label">Address</form:label>
+            <form:errors path="address" cssClass="invalid-feedback" element="div" />
           </div>
           <div class="form-floating col-4">
-            <spring:bind path="ward">
-              <form:input
-                path="ward"
-                id="form-ward"
-                cssClass="form-control ${status.error ? 'is-invalid' : ''}"
-                type="text"
-                placeholder="Ward"
-              />
-              <label for="form-ward" class="form-label">Ward</label>
-              <form:errors path="ward" cssClass="invalid-feedback" element="div" />
-            </spring:bind>
+            <form:input
+              path="ward"
+              id="form-ward"
+              cssClass="form-control"
+              cssErrorClass="form-control is-invalid"
+              type="text"
+              placeholder="Ward"
+            />
+            <form:label path="ward" for="form-ward" cssClass="form-label">Ward</form:label>
+            <form:errors path="ward" cssClass="invalid-feedback" element="div" />
           </div>
           <div class="form-floating col-4">
-            <spring:bind path="district">
-              <form:input
-                path="district"
-                id="form-district"
-                cssClass="form-control ${status.error ? 'is-invalid' : ''}"
-                type="text"
-                placeholder="District"
-              />
-              <label for="form-district" class="form-label">District</label>
-              <form:errors path="district" cssClass="invalid-feedback" element="div" />
-            </spring:bind>
+            <form:input
+              path="district"
+              id="form-district"
+              cssClass="form-control"
+              cssErrorClass="form-control is-invalid"
+              type="text"
+              placeholder="District"
+            />
+            <form:label path="district" for="form-district" cssClass="form-label">District</form:label>
+            <form:errors path="district" cssClass="invalid-feedback" element="div" />
           </div>
           <div class="form-floating col-4">
-            <spring:bind path="city">
-              <form:input
-                path="city"
-                id="form-city"
-                cssClass="form-control ${status.error ? 'is-invalid' : ''}"
-                type="text"
-                placeholder="City"
-              />
-              <label for="form-city" class="form-label">City</label>
-              <form:errors path="city" cssClass="invalid-feedback" element="div" />
-            </spring:bind>
+            <form:input
+              path="city"
+              id="form-city"
+              cssClass="form-control"
+              cssErrorClass="form-control is-invalid"
+              type="text"
+              placeholder="City"
+            />
+            <form:label path="city" for="form-city" cssClass="form-label">City</form:label>
+            <form:errors path="city" cssClass="invalid-feedback" element="div" />
           </div>
           <hr />
           <div class="col-12 text-end">
