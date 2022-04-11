@@ -31,15 +31,17 @@
             <li class="nav-item"><my:hlink cssClass="nav-link" url="/signup">Sign up</my:hlink></li>
           </sec:authorize>
           <sec:authorize access="isAuthenticated()">
-            <li class="nav-item me-2">
-              <my:hlink cssClass="nav-link position-relative" url="/cart">
-                <i class="bi bi-cart fs-4"></i>
-                <span
-                  id="navbar-cart-quantity"
-                  class="position-absolute mt-2 top-0 start-100 translate-middle badge rounded-pill bg-dark"
-                ><c:out value="${cart.totalQuantity}" /></span>
-              </my:hlink>
-            </li>
+            <sec:authorize access="!hasRole('ADMIN')">
+              <li class="nav-item me-2">
+                <my:hlink cssClass="nav-link position-relative" url="/cart">
+                  <i class="bi bi-cart fs-4"></i>
+                  <span
+                    id="navbar-cart-quantity"
+                    class="position-absolute mt-2 top-0 start-100 translate-middle badge rounded-pill bg-dark"
+                  ><c:out value="${cart.totalQuantity}" /></span>
+                </my:hlink>
+              </li>
+            </sec:authorize>
             <li class="nav-item dropdown">
               <my:link
                 cssClass="nav-link dropdown-toggle"
@@ -50,7 +52,12 @@
                 aria-expanded="false"
                 ><sec:authentication property="name" /></my:link>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li class="nav-item"><my:hlink cssClass="dropdown-item" url="/order">Order</my:hlink></li>
+                <sec:authorize access="hasRole('ADMIN')">
+                  <li class="nav-item"><my:hlink cssClass="dropdown-item" url="/admin/products">Product Editor</my:hlink></li>
+                </sec:authorize>
+                <sec:authorize access="!hasRole('ADMIN')">
+                  <li class="nav-item"><my:hlink cssClass="dropdown-item" url="/order">Order</my:hlink></li>
+                </sec:authorize>
                 <li><hr class="dropdown-divider" /></li>
                 <li>
                   <my:form url="/logout" method="POST">
