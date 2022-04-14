@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
@@ -15,6 +16,11 @@
   <%@ include file="/WEB-INF/jspf/header.jspf"%>
 
   <div class="container-xxl py-5 px-4">
+    <div class="fs-2 text-dark">
+      <my:link url="/admin/products" cssClass="text-muted">
+        <i class="bi bi-arrow-left-short"></i>
+      </my:link>
+    </div>
     <div class="row justify-content-center">
       <div class="col-12 col-md-8">
         <c:url value="/admin/product/${productId}" var="formUrl" />

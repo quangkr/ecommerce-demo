@@ -15,6 +15,13 @@
   <div class="container-xxl py-5 px-4">
     <h2 class="mb-4">Product editor</h2>
 
+    <div class="d-flex justify-content-end">
+      <my:link url="/admin/product/new" cssClass="btn btn-primary">
+        <i class="bi bi-plus-lg"></i>
+        New product
+      </my:link>
+    </div>
+
     <div class="mt-4">
       <my:pagination
         url="/admin/products"

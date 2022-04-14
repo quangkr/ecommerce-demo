@@ -3,6 +3,7 @@ function newMember() {
     result.className = 'input-group mb-2';
     const input = document.createElement('input');
     input.className = 'form-control';
+    input.setAttribute('placeholder', 'Product description');
     const addBtn = document.createElement('button');
     addBtn.className = 'btn btn-sm btn-outline-primary btn-add-description';
     addBtn.setAttribute('type', 'button');
