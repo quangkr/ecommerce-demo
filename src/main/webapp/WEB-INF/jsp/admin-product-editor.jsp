@@ -17,7 +17,7 @@
 
   <div class="container-xxl py-5 px-4">
     <div class="fs-2 text-dark">
-      <my:link url="/admin/products" cssClass="text-muted">
+      <my:link url="/admin/products?mode=edit" cssClass="text-muted">
         <i class="bi bi-arrow-left-short"></i>
       </my:link>
     </div>

@@ -9,12 +9,16 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dxc.qdang.ecommercedemo.dto.AdminProductDto;
 import com.dxc.qdang.ecommercedemo.model.Product;
@@ -28,12 +32,39 @@ public class AdminProductController {
     ProductService productService;
 
     @GetMapping("/products")
-    public ModelAndView showProductsPage(
+    public String showProductsPage(
+            Model model,
+            @RequestParam(name = "mode") String mode,
             @PageableDefault(
                     size = 10,
                     sort = { "category", "brand", "price" },
                     direction = Direction.DESC) Pageable pageable) {
-        return new ModelAndView("admin-product", "products", productService.getAllProducts(pageable));
+        if ("restore".equalsIgnoreCase(mode)) {
+            model.addAttribute("products", productService.getAllDisabledProducts(pageable));
+        } else {
+            model.addAttribute("products", productService.getAllEnabledProducts(pageable));
+        }
+        model.addAttribute("mode", mode);
+
+        return "admin-product-list";
+    }
+
+    @PutMapping("/products")
+    @ResponseBody
+    public Iterable<Product> restoreProducts(
+            Model model,
+            @RequestBody Iterable<Long> productIds) {
+        productService.restoreProducts(productIds);
+        return productService.getAllDisabledProducts();
+    }
+
+    @DeleteMapping("/products")
+    @ResponseBody
+    public Iterable<Product> removeProducts(
+            Model model,
+            @RequestBody Iterable<Long> productIds) {
+        productService.removeProducts(productIds);
+        return productService.getAllEnabledProducts();
     }
 
     @GetMapping("/product/new")
@@ -81,7 +112,7 @@ public class AdminProductController {
             return "admin-product-editor";
         }
 
-        return "redirect:/admin/products";
+        return "redirect:/admin/products?mode=edit";
     }
 
     @PostMapping("/product/{id}")
@@ -104,7 +135,7 @@ public class AdminProductController {
             return "admin-product-editor";
         }
 
-        return "redirect:/admin/products";
+        return "redirect:/admin/products?mode=edit";
     }
 
 }

@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
+import com.dxc.qdang.ecommercedemo.util.BooleanConverter;
 import com.dxc.qdang.ecommercedemo.util.ProductDescriptionConverter;
 import com.dxc.qdang.ecommercedemo.util.SerializableVersion;
 
@@ -52,6 +53,10 @@ public class Product implements Serializable {
 
     @NonNull
     private Integer price;
+
+    @Column(length = 1, nullable = false)
+    @Convert(converter = BooleanConverter.class)
+    private boolean enabled = true;
 
     @NonNull
     @ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })

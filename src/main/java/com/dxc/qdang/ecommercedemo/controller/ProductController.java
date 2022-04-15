@@ -31,12 +31,12 @@ public class ProductController {
             @PathVariable(name = "category", required = false) Optional<String> categoryName,
             @PageableDefault(size = 10, sort = { "category", "price" }, direction = Direction.DESC) Pageable pageable) {
         if (categoryName.isPresent()) {
-            model.addAttribute("productPage", productService.getProductsByCategory(categoryName.get(), pageable));
+            model.addAttribute("productPage", productService.getEnabledProductsByCategory(categoryName.get(), pageable));
             model.addAttribute("categoryName", categoryName.get());
             model.addAttribute("title",
                     categoryName.get().substring(0, 1).toUpperCase() + categoryName.get().substring(1).toLowerCase());
         } else {
-            model.addAttribute("productPage", productService.getAllProducts(pageable));
+            model.addAttribute("productPage", productService.getAllEnabledProducts(pageable));
             model.addAttribute("title", "Products");
         }
 

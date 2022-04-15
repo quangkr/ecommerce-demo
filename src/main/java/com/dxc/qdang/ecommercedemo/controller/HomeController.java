@@ -21,8 +21,8 @@ public class HomeController {
     @RequestMapping("/")
     public String showHomePage(Model model) {
         Pageable pageable = PageRequest.of(0, 4, Sort.by("price").descending());
-        Page<Product> cellphones = productService.getProductsByCategory("cellphone", pageable);
-        Page<Product> laptops = productService.getProductsByCategory("laptop", pageable);
+        Page<Product> cellphones = productService.getEnabledProductsByCategory("cellphone", pageable);
+        Page<Product> laptops = productService.getEnabledProductsByCategory("laptop", pageable);
 
         model.addAttribute("cellphones", cellphones.getContent());
         model.addAttribute("laptops", laptops.getContent());

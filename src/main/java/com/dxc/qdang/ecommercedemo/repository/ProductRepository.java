@@ -11,6 +11,10 @@ import com.dxc.qdang.ecommercedemo.model.ProductCategory;
 @Repository
 public interface ProductRepository extends PagingAndSortingRepository<Product, Long> {
 
-    Page<Product> findByCategory(ProductCategory category, Pageable pageable);
+    Iterable<Product> findByEnabled(boolean enabled);
+
+    Page<Product> findByEnabled(boolean enabled, Pageable pageable);
+
+    Page<Product> findByCategoryAndEnabled(ProductCategory category, boolean enabled, Pageable pageable);
 
 }

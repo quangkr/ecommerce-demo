@@ -34,18 +34,22 @@ public class ProductService {
         return productRepository.findById(productId).orElse(null);
     }
 
-    public Page<Product> getAllProducts(Pageable pageable) {
-        return productRepository.findAll(pageable);
+    public Iterable<Product> getAllEnabledProducts() { return productRepository.findByEnabled(true); }
+
+    public Page<Product> getAllEnabledProducts(Pageable pageable) {
+        return productRepository.findByEnabled(true, pageable);
     }
 
-    public Iterable<ProductBrand> getAllProductBrands() { return productBrandRepository.findAll(); }
+    public Iterable<Product> getAllDisabledProducts() { return productRepository.findByEnabled(false); }
 
-    public Iterable<ProductCategory> getAllProductCategories() { return productCategoryRepository.findAll(); }
+    public Page<Product> getAllDisabledProducts(Pageable pageable) {
+        return productRepository.findByEnabled(false, pageable);
+    }
 
-    public Page<Product> getProductsByCategory(String categoryName, Pageable pageable) {
+    public Page<Product> getEnabledProductsByCategory(String categoryName, Pageable pageable) {
         Optional<ProductCategory> category = productCategoryRepository.findByNameIgnoreCase(categoryName);
         if (category.isPresent()) {
-            return productRepository.findByCategory(category.get(), pageable);
+            return productRepository.findByCategoryAndEnabled(category.get(), true, pageable);
         } else {
             return productRepository.findAll(pageable);
         }
@@ -60,6 +64,18 @@ public class ProductService {
         Product product = convertDtoToEntity(productDto);
         product.setId(productId);
         return productRepository.save(product);
+    }
+
+    public void removeProducts(Iterable<Long> productIds) {
+        Iterable<Product> products = productRepository.findAllById(productIds);
+        products.forEach(p -> p.setEnabled(false));
+        productRepository.saveAll(products);
+    }
+
+    public void restoreProducts(Iterable<Long> productIds) {
+        Iterable<Product> products = productRepository.findAllById(productIds);
+        products.forEach(p -> p.setEnabled(true));
+        productRepository.saveAll(products);
     }
 
     private Product convertDtoToEntity(AdminProductDto productDto) throws IllegalArgumentException {
